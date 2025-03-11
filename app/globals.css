@@ -19,8 +19,75 @@
   }
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* font-family: "jost", sans-serif; */
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: jost, Arial, Helvetica, sans-serif;
+}
+
+.button{
+  @apply w-full flex justify-center items-center gap-2 cursor-pointer rounded-[6px] my-2 p-2 ;
+}
+
+.header{
+  @apply flex justify-center items-center lg:absolute lg:left-0 w-full p-4 bg-white rounded-[6px];
+}
+
+.header__title{
+  @apply text-[rgb(44,38,56)] text-xl font-[500] w-full;
+}
+
+.input {
+  @apply bg-[rgb(60,54,76)] px-2 py-1 text-sm rounded-[6px] w-full focus:outline-[rgba(255,255,255,0.8)] focus:outline-[1px];
+}
+
+/* #loginPass::-ms-reveal {
+  filter: invert(100%);
+} */
+
+.signup {
+  @apply flex flex-col lg:flex-row bg-[rgb(44,38,56)] p-2 h-[100vh] w-full gap-2;
+}
+
+.signup__container {
+  @apply relative flex-col w-full lg:w-[50%] h-full rounded-[6px] overflow-hidden;
+}
+
+.signup__container__info {
+  @apply flex flex-col px-10;
+}
+
+.signup__container__info__title {
+  @apply text-4xl my-4;
+}
+
+.signup__form {
+  @apply flex flex-col my-10 gap-4 w-[100%];
+}
+
+.signup__form__group {
+  @apply flex gap-4 w-full;
+}
+
+.signup__form__google{
+  @apply w-full;
+}
+
+.signup__form__text{
+  @apply flex w-full justify-center gap-2;
+}
+
+.signup__form__google__button{
+  @apply w-full;
+}
+
+.slide{
+  @apply relative bg-gradient-to-b from-[rgba(53,20,101,0.9)] to-[rgba(255,0,0,0.2)] flex-col w-full lg:w-[50%] lg:h-full rounded-[6px] lg:overflow-hidden;
 }
