@@ -1,9 +1,15 @@
 import React from "react";
 
-const Header = () => {
+interface headerProps {
+  className?: string;
+}
+
+const Header: React.FC<headerProps> = ({ className }) => {
   return (
-    <div className="header">
-      <p className="header__title">HON. FERDINAND DOZIE NWANKWO CENTER FOR DEVELOPMENT AND ICT</p>
+    <div className={["header", `${className}`].filter(Boolean).join(" ")}>
+      <p className="header__title">
+        HON. FERDINAND DOZIE NWANKWO CENTER FOR DEVELOPMENT AND ICT
+      </p>
     </div>
   );
 };

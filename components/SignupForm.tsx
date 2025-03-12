@@ -19,9 +19,9 @@ const SignupForm = () => {
       <Button className="bg-[rgb(109,84,181)]">Create account</Button>
       <div className="signup__form__google">
         <div className="signup__form__text">
-          <hr />
+          <hr className="line" />
           <p>Or register with</p>
-          <hr />
+          <hr className="line" />
         </div>
 
         <div className="signup__form__google__button">

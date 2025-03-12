@@ -20,9 +20,8 @@ const Slide = () => {
             className={["object-contain scale-[1.2]", `${isMobile ? "hidden" : "flex"}`]
             .filter(Boolean)
             .join(" ")}
-            // className="object-contain scale-[1.2]"
           />
-          <Header />
+          <Header className="lg:absolute lg:left-0" />
         </div>
       }
     </>
