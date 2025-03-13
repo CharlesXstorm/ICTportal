@@ -32,33 +32,59 @@ body {
   font-family: jost, Arial, Helvetica, sans-serif;
 }
 
-.button{
-  @apply w-full flex justify-center items-center gap-2 cursor-pointer rounded-[6px] my-2 p-2 ;
+.button {
+  @apply w-full flex justify-center items-center gap-2 cursor-pointer rounded-[6px] my-2 p-2;
 }
 
-.header{
+.header {
   @apply flex justify-center items-center w-full p-4 bg-white rounded-[6px];
 }
 
-.header__title{
+.header__title {
   @apply text-[rgb(44,38,56)] text-xl font-[500] w-full;
 }
 
 .input {
-  @apply bg-[rgb(60,54,76)] px-2 py-1 text-sm rounded-[6px] w-full focus:outline-[rgba(255,255,255,0.8)] focus:outline-[1px];
+  @apply bg-[rgb(60,54,76)] px-2 py-1 text-sm w-full rounded-[6px] focus:outline-[rgba(255,255,255,0.8)] focus:outline-[1px];
 }
 
-.login{
-  
+.login {
+  @apply flex flex-col justify-center items-center bg-[rgb(44,38,56)] p-2 h-[100vh] w-full gap-2;
 }
 
-.line{
-  @apply h-[1px] bg-white w-[30%] border-none;
+.line {
+  @apply h-[1px] bg-white w-[20%] border-none;
+}
+
+.photo_upload {
+  @apply flex w-[120px] h-[120px] rounded-[6px] border-[2px] border-white overflow-hidden;
+}
+
+.register {
+  @apply flex flex-col justify-center items-center bg-[rgb(44,38,56)] px-2 w-full gap-2;
+}
+
+.register__container {
+  @apply w-full px-4 lg:px-0 lg:w-[50%];
+}
+
+.register__title {
+  @apply text-2xl py-4;
 }
 
 /* #loginPass::-ms-reveal {
   filter: invert(100%);
 } */
+
+select {
+  appearance: none; /* Remove the default arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("/svg/down-arrow.svg");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+}
 
 .signup {
   @apply flex flex-col lg:flex-row bg-[rgb(44,38,56)] p-2 h-[100vh] w-full gap-2;
@@ -81,21 +107,37 @@ body {
 }
 
 .signup__form__group {
-  @apply flex gap-4 w-full;
+  @apply flex flex-col md:flex-row gap-4 w-full;
 }
 
-.signup__form__google{
+.signup__form__google {
   @apply flex flex-col gap-2  w-full;
 }
 
-.signup__form__text{
+.signup__form__item {
+  @apply w-[50%];
+}
+
+.signup__form__photo {
+  @apply flex w-full justify-end items-center;
+}
+
+.signup__form__photo__content {
+  @apply flex w-[100%] md:w-[80%] justify-end gap-4;
+}
+
+.signup__form__title {
+  @apply py-2 font-[500];
+}
+
+.signup__form__text {
   @apply flex w-full justify-center items-center gap-2;
 }
 
-.signup__form__google__button{
+.signup__form__google__button {
   @apply w-full;
 }
 
-.slide{
+.slide {
   @apply relative bg-gradient-to-b from-[rgba(53,20,101,0.9)] to-[rgba(255,0,0,0.2)] flex-col w-full lg:w-[50%] lg:h-full rounded-[6px] lg:overflow-hidden;
 }

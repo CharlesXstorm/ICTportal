@@ -1,11 +1,7 @@
 "use client";
 
 import React, { PropsWithChildren } from "react";
-
-interface buttonProps extends PropsWithChildren {
-  className?: string;
-  type?: "button" | "submit" | "reset";
-}
+import { buttonProps } from "@/types";
 
 const Button: React.FC<buttonProps> = ({
   children,

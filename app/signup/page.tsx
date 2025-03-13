@@ -2,6 +2,7 @@
 import Header from "@/components/Header";
 import SignupForm from "@/components/SignupForm";
 import Slide from "@/components/Slide";
+import Link from "@/components/ui/Link";
 import Image from "next/image";
 import React from "react";
 
@@ -15,7 +16,7 @@ const page = () => {
           <p className="signup__container__info__title">Create an account</p>
           <p className="text-sm">
             Already have an account?{" "}
-            <button type="button" className="cursor-pointer text-blue-600">Log in</button>
+            <Link href="/login" type="button" className="cursor-pointer text-blue-600">Log in</Link>
           </p>
 
           <SignupForm />
