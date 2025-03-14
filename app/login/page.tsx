@@ -13,9 +13,15 @@ const page = () => {
             Log in to your account
           </p>
           <p className="text-sm">
-                  Don't have an account?{" "}
-                  <Link href="/signup" type="button" className="cursor-pointer text-blue-600">Sign up</Link>
-                </p>
+            Don't have an account?{" "}
+            <Link
+              href="/"
+              type="button"
+              className="cursor-pointer text-blue-600"
+            >
+              Sign up
+            </Link>
+          </p>
 
           <LoginForm />
         </div>
