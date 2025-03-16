@@ -1,9 +1,16 @@
-
 import mongoose from "mongoose";
 import { isEmail } from "validator";
-import bcrypt from "bcryptjs";
 
-const userSchema = new mongoose.Schema({
+const dataSchema = new mongoose.Schema({
+  user: {
+    type: Array,
+    default: [
+      {
+        email: "",
+        password: "",
+      },
+    ],
+  },
   lastName: {
     type: String,
     trim: true,
@@ -20,12 +27,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     trim: true,
     lowercase: true,
-  },
-  password: {
-    type: String,
-    trim: true,
-    required: [true, "A user must have a password"],
-    minlength: [6, "Minimum password length is 6 characters"],
   },
   photo: {
     type: String,
@@ -188,30 +189,5 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-//encrypt password before save
-userSchema.pre("save", async function (next) {
-  const salt = await bcrypt.genSalt();
-  this.password = await bcrypt.hash(this.password, salt);
-  next();
-});
 
-//create a custom login method on the model to decrypt the password
-userSchema.statics.login = async function (email, password) {
-  const user = await this.findOne({ email });
-
-  if (user) {
-    const auth = await bcrypt.compare(password, user.password);
-
-    if (auth) {
-      return user;
-    } else {
-      throw Error("incorrect password");
-    }
-  } else {
-    throw Error("This account does not exist");
-  }
-};
-
-const userModel = mongoose.model("user", userSchema);
-
-module.exports = userModel;
+export const dataModel = mongoose.model("data", dataSchema);
