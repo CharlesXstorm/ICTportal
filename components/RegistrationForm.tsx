@@ -1,8 +1,11 @@
+"use client"
+
 import React from "react";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
 import Select from "./ui/Select";
 import File from "./ui/File";
+import Photo from "./ui/Photo";
 
 const RegistrationForm = () => {
   return (
@@ -12,10 +15,16 @@ const RegistrationForm = () => {
           <p className="text-sm">
             Upload a clear passport photo.
             <br />
-            <br/>
+            <br />
             Accepted files are JPG, JPEG & PNG
           </p>
-          <File name="photo" />
+          <Photo
+            type="file"
+            name="photo"
+            accept="image/png, image/jpg, image/jpeg"
+            maxSize={300}
+          />
+          {/* <File name="photo" /> */}
         </div>
       </div>
 
@@ -26,7 +35,11 @@ const RegistrationForm = () => {
 
       <div className="signup__form__group">
         <Input type="text" name="othername" placeholder="Other name" />
-        <Select className="w-[50%]" name="gender" options={["Male", "Female"]} />
+        <Select
+          className="w-[50%]"
+          name="gender"
+          options={["Male", "Female"]}
+        />
       </div>
 
       <div className="signup__form__group">
@@ -50,7 +63,11 @@ const RegistrationForm = () => {
       <Input type="text" name="address" placeholder="Residential address" />
 
       <div className="signup__form__item">
-        <Select className="w-[50%]" name="marital" options={["Single", "Married"]} />
+        <Select
+          className="w-[50%]"
+          name="marital"
+          options={["Single", "Married"]}
+        />
       </div>
 
       <p className="signup__form__title">PROGRAM INFORMATION</p>

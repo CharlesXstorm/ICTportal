@@ -1,6 +1,6 @@
-import connectToDatabase from "../../../lib/mongodb";
+import connectToDatabase from "../../../../lib/mongodb";
 import { NextRequest, NextResponse } from "next/server";
-import { getUser } from "../../../lib/controllers/userControllers";
+import { getUserData } from "../../../../lib/controllers/userControllers";
 
 export async function GET(req: NextRequest) {
   try {
@@ -14,8 +14,8 @@ export async function GET(req: NextRequest) {
         throw new Error("No user token found. Please login");
       }
 
-      const getUserRes = await getUser(req, userId);
-      return getUserRes;
+      const getUserDataRes = await getUserData(req, userId);
+      return getUserDataRes;
     } else {
       throw new Error("DB not connected");
     }

@@ -4,12 +4,10 @@ import { isEmail } from "validator";
 const dataSchema = new mongoose.Schema({
   user: {
     type: Array,
-    default: [
-      {
-        email: "",
-        password: "",
-      },
-    ],
+    default: {
+      email: String,
+      password: String,
+    },
   },
   lastName: {
     type: String,
@@ -78,7 +76,6 @@ const dataSchema = new mongoose.Schema({
   },
 
   otherInfo: {
-    type: Array,
     email: {
       type: String,
       trim: true,
@@ -102,7 +99,6 @@ const dataSchema = new mongoose.Schema({
   },
 
   progInfo: {
-    type: Array,
     choice: {
       type: String,
       trim: true,
@@ -112,7 +108,6 @@ const dataSchema = new mongoose.Schema({
   },
 
   progDruration: {
-    type: Array,
     startDate: {
       type: String,
       trim: true,
@@ -128,7 +123,6 @@ const dataSchema = new mongoose.Schema({
   },
 
   eduBackground: {
-    type: Array,
     background1: {
       type: String,
       trim: true,
@@ -189,5 +183,5 @@ const dataSchema = new mongoose.Schema({
   },
 });
 
-
-export const dataModel = mongoose.model("data", dataSchema);
+export const dataModel =
+  mongoose.models.data || mongoose.model("data", dataSchema);

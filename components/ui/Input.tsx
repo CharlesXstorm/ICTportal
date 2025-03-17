@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useRef } from "react";
 
 interface inputProps {
   id?: string;
@@ -6,9 +8,26 @@ interface inputProps {
   name?: string;
   value?: string;
   placeholder: string;
+  setData?: React.Dispatch<React.SetStateAction<{ [key: string]: any }>>;
+  autoComplete?: React.HTMLInputAutoCompleteAttribute;
 }
 
-const Input: React.FC<inputProps> = ({ id, type, name, placeholder }) => {
+const Input: React.FC<inputProps> = ({
+  id,
+  type,
+  name,
+  value,
+  placeholder,
+  setData,
+  autoComplete,
+}) => {
+  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (setData) {
+      setData((prev) => {
+        return { ...prev, [`${e.target.name}`]: `${e.target.value}` };
+      });
+    }
+  };
   return (
     <>
       <input
@@ -16,7 +35,10 @@ const Input: React.FC<inputProps> = ({ id, type, name, placeholder }) => {
         className="input"
         type={type}
         name={name}
+        value={value}
         placeholder={placeholder}
+        onChange={changeHandler}
+        autoComplete={autoComplete}
       />
     </>
   );

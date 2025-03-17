@@ -5,7 +5,7 @@ import React from "react";
 const page = () => {
   return (
     <div className="register">
-      <Header />
+      <Header loggedIn/>
 
       <div className="register__container">
         <p className="register__title">

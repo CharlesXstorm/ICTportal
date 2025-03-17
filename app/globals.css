@@ -37,11 +37,15 @@ body {
 }
 
 .header {
-  @apply flex justify-center items-center w-full p-4 bg-white rounded-[6px];
+  @apply flex flex-col lg:flex-row gap-4 justify-between items-center w-full p-4 bg-white rounded-[6px];
 }
 
 .header__title {
   @apply text-[rgb(44,38,56)] text-xl font-[500] w-full;
+}
+
+.header__user {
+  @apply w-full lg:w-[20%] text-[rgb(44,38,56)] gap-4 flex items-end;
 }
 
 .input {
@@ -140,4 +144,8 @@ select {
 
 .slide {
   @apply relative bg-gradient-to-b from-[rgba(53,20,101,0.9)] to-[rgba(255,0,0,0.2)] flex-col w-full lg:w-[50%] lg:h-full rounded-[6px] lg:overflow-hidden;
+}
+
+.upload__image{
+  @apply absolute left-0 top-0 w-full h-full
 }

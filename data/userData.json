@@ -1,0 +1,33 @@
+{
+  "lastName": "ukadike",
+  "firstName": "charles",
+  "otherName": "ekene",
+  "photo": "http//imgCDN.jpeg",
+  "gender": "male",
+  "dateOfBirth": "6/sept/2024",
+  "mobileNumber": "0801001001",
+  "nationality": "nigerian",
+  "stateOfOrigin": "anambra",
+  "localGovArea": "nnewi-south",
+  "town": "ukpor",
+
+  "otherInfo": {
+    "email": "xstorm@example.com",
+    "resAddress": "address, lagos",
+    "maritalStatus": "married"
+  },
+  "progInfo": { "choice": "programming" },
+
+  "progDruration": { "startDate": "4/oct/25", "endDate": "2/dec/25" },
+
+  "eduBackground": { "background1": "bosol", "background2": "lutron" },
+
+  "referees": {
+    "name1": "ref",
+    "phoneNumber1": "number1",
+    "relationship1": "brother",
+    "name2": "ref2",
+    "phoneNumber2": "number2",
+    "relationship2": "sister"
+  }
+}
