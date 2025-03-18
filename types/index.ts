@@ -14,7 +14,7 @@ export interface inputProps {
   id?: string;
   type: string;
   rows?: number;
-  cols?:number;
+  cols?: number;
   name?: string;
   value?: string;
   accept?: string;
@@ -24,7 +24,10 @@ export interface inputProps {
   maxSize?: number;
   maxWidth?: number;
   maxHeight?: number;
-  onChange?: (e:React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>)=> void;
+  setData?: React.Dispatch<React.SetStateAction<{ [key: string]: any }>>;
+  onChange?: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
 }
 
 export interface svgProps {

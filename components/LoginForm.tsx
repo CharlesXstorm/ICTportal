@@ -7,6 +7,7 @@ import Input from "./ui/Input";
 import Button from "./ui/Button";
 import Google from "./svgs/Google";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const LoginForm = () => {
   const [data, setData] = useState<{ [key: string]: any }>({ ...loginData });
@@ -27,14 +28,17 @@ const LoginForm = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-
       if (!response) {
         throw new Error("no login response received");
       }
-      console.log("response", response.data);
-      router.push("register");
+
+      if (response.data.data === `${process.env.NEXT_PUBLIC_ADMIN_ID}`) {
+        router.push("admin/workspace");
+      } else {
+        router.push("register");
+      }
     } catch (err: any) {
-      console.log("error", err.response.data.message);
+      toast.error(err.response.data.message);
     }
   };
 

@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 
 interface selectProps {
@@ -5,11 +7,30 @@ interface selectProps {
   className?: string;
   name: string;
   options: string[];
+  data?: string;
+  setData?: React.Dispatch<React.SetStateAction<{ [key: string]: any }>>;
 }
 
-const Select: React.FC<selectProps> = ({ id, className, name, options }) => {
+const Select: React.FC<selectProps> = ({
+  id,
+  className,
+  name,
+  options,
+  data,
+  setData,
+}) => {
+  const selectHandler = (e: any) => {
+    if (setData) {
+      setData((prev: any) => {
+        return { ...prev, [e.target.name]: e.target.value };
+      });
+    }
+    // console.log("select event", e.target.name);
+  };
+
   return (
     <select
+      onChange={selectHandler}
       className={["input", className].filter(Boolean).join(" ")}
       id={id}
       name={name}

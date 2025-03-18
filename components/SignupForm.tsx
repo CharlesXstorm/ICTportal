@@ -7,6 +7,7 @@ import Input from "./ui/Input";
 import Button from "./ui/Button";
 import Google from "./svgs/Google";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const SignupForm = () => {
   const [data, setData] = useState<{ [key: string]: any }>({ ...signupData });
@@ -31,10 +32,9 @@ const SignupForm = () => {
       if (!response) {
         throw new Error("no signup response received")
       }
-      console.log("response", response.data);
       router.push("register");
     } catch (err:any) {
-      console.log("error",err.response.data.message)
+      toast.error(err.response.data.message)
     }
   };
 
