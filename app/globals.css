@@ -61,7 +61,11 @@ body {
 }
 
 .photo_upload {
-  @apply flex w-[120px] h-[120px] rounded-[6px] border-[2px] border-white overflow-hidden;
+  @apply flex w-[120px] h-[120px] rounded-[6px] border-[2px] border-white border-dashed overflow-hidden;
+}
+
+.photo_upload:hover {
+  border-color: chartreuse;
 }
 
 .register {
@@ -127,7 +131,7 @@ select {
 }
 
 .signup__form__photo__content {
-  @apply flex w-[100%] md:w-[80%] justify-end gap-4;
+  @apply flex w-[100%] justify-end gap-4 lg:gap-6;
 }
 
 .signup__form__title {
@@ -148,4 +152,16 @@ select {
 
 .upload__image{
   @apply absolute left-0 top-0 w-full h-full
+}
+
+.uploadbox {
+  padding: 2px;
+  border: 1px dashed #999;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.uploadbox:hover {
+  border-color: chartreuse;
 }

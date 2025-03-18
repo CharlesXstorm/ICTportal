@@ -31,6 +31,20 @@ const createToken = (id: any) => {
   });
 };
 
+export const logOut = async (req: NextRequest) => {
+  const cookieStore = await cookies();
+  cookieStore.set("jwt", "", {
+    maxAge: 1,
+  });
+  return NextResponse.json(
+    {
+      status: "success",
+      message: "logged out",
+    },
+    { status: 200 }
+  );
+};
+
 //signup controller
 export const signUp = async (req: NextRequest, body: any) => {
   //signUp user
@@ -150,7 +164,7 @@ export const createUserData = async (req: NextRequest, body: any) => {
 export const getUserData = async (req: NextRequest, userId: any) => {
   //get user data
   try {
-    console.log("get user data working")
+    console.log("get user data working");
     if (!mongoose.Types.ObjectId.isValid(userId)) {
       throw new Error("Invalid userId provided");
     }
