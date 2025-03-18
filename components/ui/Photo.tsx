@@ -10,21 +10,15 @@ const Photo: React.FC<inputProps> = ({
   className,
   type,
   name,
-  setData,
+  // setData,
   accept,
   maxFile = 1,
   maxSize = 200,
   maxWidth = 1024,
   maxHeight = 1024,
-  onChange,
 }) => {
   const [info, setInfo] = useState<any[]>([]);
-  const [error, setError] = useState("");
   const [bgImage, setBgImage] = useState("");
-
-  // console.log("photo info", info);
-  // console.log("error", error);
-  // console.log("image", bgImage);
 
   ///////////////processFile/////////////////
   const processFile = async (files: FileList) => {

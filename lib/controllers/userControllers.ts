@@ -9,7 +9,7 @@ import { NextRequest, NextResponse } from "next/server";
 const handleErrors = (err: string | string[]) => {
   //sign up
   if (err.includes("user validation")) {
-    let error = { email: "", password: "" };
+    const error = { email: "", password: "" };
     if (err.includes("email")) {
       error.email = "Please enter a valid email";
       return error.email;
@@ -31,7 +31,7 @@ const createToken = (id: any) => {
   });
 };
 
-export const logOut = async (req: NextRequest) => {
+export const logOut = async () => {
   const cookieStore = await cookies();
   cookieStore.set("jwt", "", {
     maxAge: 1,
@@ -184,7 +184,7 @@ export const getUserData = async (req: NextRequest, userId: any) => {
 };
 
 //getAllUserData controller
-export const getAllUserData = async (req: NextRequest) => {
+export const getAllUserData = async () => {
   //get all user data
   try {
     const allUserData = await Data.find();
