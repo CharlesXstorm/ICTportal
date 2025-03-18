@@ -16,7 +16,6 @@ const Select: React.FC<selectProps> = ({
   className,
   name,
   options,
-  data,
   setData,
 }) => {
   const selectHandler = (e: any) => {

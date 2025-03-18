@@ -1,12 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { registerData } from "@/data";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
 import Select from "./ui/Select";
-// import File from "./ui/File";
 import Photo from "./ui/Photo";
 
 const RegistrationForm = () => {

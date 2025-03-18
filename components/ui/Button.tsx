@@ -1,6 +1,5 @@
 "use client";
 
-import React, { PropsWithChildren } from "react";
 import { buttonProps } from "@/types";
 
 const Button: React.FC<buttonProps> = ({

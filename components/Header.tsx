@@ -19,9 +19,7 @@ const Header: React.FC<headerProps> = ({
   const {
     userInfo,
     setUserInfo,
-    userData,
     setUserData,
-    adminData,
     setAdminData,
   } = useStore();
   const router = useRouter();

@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
         throw new Error("No user token found. Please login");
       }
 
-      const getAllUserDataRes = await getAllUserData(req);
+      const getAllUserDataRes = await getAllUserData();
       return getAllUserDataRes;
     } else {
       throw new Error("DB not connected");

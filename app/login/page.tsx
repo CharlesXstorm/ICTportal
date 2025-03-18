@@ -13,7 +13,7 @@ const page = () => {
             Log in to your account
           </p>
           <p className="text-sm">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link
               href="/"
               type="button"
