@@ -8,13 +8,17 @@ import Button from "./ui/Button";
 import Google from "./svgs/Google";
 import axios from "axios";
 import { toast } from "react-toastify";
+import Loading from "./ui/Loading";
 
 const SignupForm = () => {
   const [data, setData] = useState<{ [key: string]: any }>({ ...signupData });
+  const [btnSigningUp, setBtnSigningUp] = useState(false);
+  // const [btnGoogle, setGoogle] = useState(false)
   const router = useRouter();
 
   const signup = async () => {
     try {
+      setBtnSigningUp((prev)=> !prev)
       const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
       const signUpInfo = new FormData();
@@ -30,11 +34,14 @@ const SignupForm = () => {
       });
 
       if (!response) {
-        throw new Error("no signup response received")
+        throw new Error("no signup response received");
       }
+      setBtnSigningUp((prev)=> !prev)
       router.push("register");
-    } catch (err:any) {
-      toast.error(err.response.data.message)
+    } catch (err: any) {
+      setBtnSigningUp((prev)=> !prev)
+      console.log("signupError",err.response)
+      toast.error(err.response.data.message);
     }
   };
 
@@ -78,6 +85,16 @@ const SignupForm = () => {
       />
 
       <Button onClick={signup} className="bg-[rgb(109,84,181)]">
+        {
+          <Loading
+            height="h-full"
+            animHeight="h-[80%]"
+            animWidth="w-[40px]"
+            className={[btnSigningUp ? "opacity-100" : "opacity-[0]"]
+              .filter(Boolean)
+              .join(" ")}
+          />
+        }
         Create account
       </Button>
       <div className="signup__form__google">

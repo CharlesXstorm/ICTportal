@@ -10,7 +10,7 @@ const Photo: React.FC<inputProps> = ({
   className,
   type,
   name,
-  // setData,
+  setData,
   accept,
   maxFile = 1,
   maxSize = 200,
@@ -51,6 +51,11 @@ const Photo: React.FC<inputProps> = ({
         // Set the background image when the file is loaded
         reader.onload = () => {
           if (reader.result) {
+            if (setData) {
+              setData((prev) => {
+                return { ...prev, photo: reader.result };
+              });
+            }
             setBgImage(`url(${reader.result})`);
           }
         };

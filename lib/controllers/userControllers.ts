@@ -9,10 +9,18 @@ import { NextRequest, NextResponse } from "next/server";
 const handleErrors = (err: string | string[]) => {
   //sign up
   if (err.includes("user validation")) {
-    const error = { email: "", password: "" };
+    const error = { email: "", password: "", lastName: "", firstName: "" };
     if (err.includes("email")) {
       error.email = "Please enter a valid email";
       return error.email;
+    }
+    if (err.includes("lastName")) {
+      error.lastName = "Please enter a last name";
+      return error.lastName;
+    }
+    if (err.includes("firstName")) {
+      error.firstName = "Please enter a first name";
+      return error.firstName;
     }
     error.password = "Minimum of 6 characters required";
     return error.password;

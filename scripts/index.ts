@@ -1,3 +1,4 @@
-import {uiscript} from "./uiscript"
+import { uiscript } from "./uiscript";
+import { upload_img } from "./upload_img";
 
-export {uiscript}
+export { uiscript, upload_img };

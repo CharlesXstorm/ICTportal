@@ -7,15 +7,31 @@ import Button from "./ui/Button";
 import Input from "./ui/Input";
 import Select from "./ui/Select";
 import Photo from "./ui/Photo";
+import Date from "./ui/Date";
+import { upload_img } from "@/scripts";
 
 const RegistrationForm = () => {
   const [data, setData] = useState<{ [key: string]: any }>({ ...registerData });
 
-  const submitHandler = () => {
-    console.log("submitData", data)
+  const submitHandler = async() => {
+    // check for filled required values here
+
+    const img_url = await upload_img(data.photo);
+
+    if(!img_url){
+      return "upload image error"
+    }
+
+    //create form data here
+
+
+    // console.log("img_url", img_url)
+    // console.log("submitData", "submitted!!")
+    // console.log("submitData", data)
   };
 
   return (
+      
     <form className="signup__form">
       <div className="signup__form__photo">
         <div className="signup__form__photo__content">
@@ -73,7 +89,7 @@ const RegistrationForm = () => {
       </div>
 
       <div className="signup__form__group">
-        <Input
+        <Date
           type="date"
           name="dateOfBirth"
           placeholder="Date of Birth*"

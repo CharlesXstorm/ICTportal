@@ -16,12 +16,8 @@ const Header: React.FC<headerProps> = ({
   loggedIn = false,
   admin = false,
 }) => {
-  const {
-    userInfo,
-    setUserInfo,
-    setUserData,
-    setAdminData,
-  } = useStore();
+  const { userInfo, setUserInfo, setUserData, setAdminData, setLoading } =
+    useStore();
   const router = useRouter();
 
   const getUserInfo = async () => {
@@ -55,9 +51,12 @@ const Header: React.FC<headerProps> = ({
       });
 
       if (!response.data.data) {
+        setLoading(false);
         throw new Error("no data in database");
       }
       setUserData(response.data.data);
+      setLoading(false);
+      // setLoaded(!loaded)
       // console.log("userData response", response.data.data);
     } catch (err: any) {
       console.log("error", err.message);
@@ -75,9 +74,12 @@ const Header: React.FC<headerProps> = ({
       });
 
       if (!response.data.data) {
+        setLoading(false);
         throw new Error("no data in database for admin");
       }
       setAdminData(response.data.data);
+      setLoading(false);
+      // setLoaded(!loaded)
       // console.log("AllData response", response.data.data);
     } catch (err: any) {
       console.log("error", err.message);
@@ -93,6 +95,7 @@ const Header: React.FC<headerProps> = ({
       if (!response) {
         throw new Error("no logout response received");
       }
+      setLoading(true);
       router.push("/login");
     } catch (err: any) {
       console.log("error", err.response.data.message);
