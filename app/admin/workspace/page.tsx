@@ -15,7 +15,7 @@ const page = () => {
           height="h-[100vh]"
           animHeight="h-[200px]"
           animWidth="w-[200px]"
-          className={[loading ? "opacity-100" : "opacity-[0]"]
+          className={[loading ? "opacity-100" : "opacity-[0]", "fixed"]
             .filter(Boolean)
             .join(" ")}
         />

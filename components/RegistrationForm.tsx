@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { registerData } from "@/data";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
@@ -9,29 +9,62 @@ import Select from "./ui/Select";
 import Photo from "./ui/Photo";
 import Date from "./ui/Date";
 import { upload_img } from "@/scripts";
+import { useStore } from "@/store";
+import axios from "axios";
+import Loading from "./ui/Loading";
 
 const RegistrationForm = () => {
   const [data, setData] = useState<{ [key: string]: any }>({ ...registerData });
+  const [btnSubmit,setBtnSubmit] = useState(false)
+  const userInfo = useStore((state) => state.userInfo);
 
-  const submitHandler = async() => {
-    // check for filled required values here
+  const submitHandler = async () => {
+    setBtnSubmit(true)
+    const publicID = `${userInfo?._id.slice(0, 5)}_${
+      userInfo?.firstName
+    }${userInfo?._id.slice(9)}_`;
 
-    const img_url = await upload_img(data.photo);
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
+    const API_AUTH = process.env.NEXT_PUBLIC_API_AUTH;
 
-    if(!img_url){
-      return "upload image error"
+    try {
+      const img_url = await upload_img(data.photo, publicID);
+
+      if (!img_url) {
+        setBtnSubmit(false)
+        toast.error("Please upload an image");
+        return
+      }
+
+      //create form data here
+      const regInfo = new FormData();
+      // Append all fields from the `data` state to the FormData object
+      Object.keys(data).forEach((key) => {
+        regInfo.append(key, data[key]);
+      });
+
+      regInfo.set("photo", img_url);//reset the photo
+
+      // Send the FormData object to the API via POST request
+      const response = await axios.post(`${API_URL}/user/createData`, regInfo, {
+        headers: {
+          authorization: `Bearer ${API_AUTH}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      if (!response) {
+        throw new Error("error: data not summited");
+      }
+      setBtnSubmit(false)
+    } catch (err: any) {
+      // setBtnSigningUp((prev) => !prev);
+      setBtnSubmit(false)
+      toast.error(err.response.data.message);
     }
-
-    //create form data here
-
-
-    // console.log("img_url", img_url)
-    // console.log("submitData", "submitted!!")
-    // console.log("submitData", data)
   };
 
   return (
-      
     <form className="signup__form">
       <div className="signup__form__photo">
         <div className="signup__form__photo__content">
@@ -279,6 +312,19 @@ const RegistrationForm = () => {
       </p>
 
       <Button onClick={submitHandler} className="bg-[rgb(109,84,181)]">
+      {btnSubmit && (
+          <Loading
+            height="h-full"
+            animHeight="h-[80%]"
+            animWidth="w-[40px]"
+            className={[
+              btnSubmit ? "opacity-100" : "opacity-[0]",
+              "absolute",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+          />
+        )}
         Submit
       </Button>
     </form>

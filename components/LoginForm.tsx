@@ -8,16 +8,12 @@ import Button from "./ui/Button";
 import Google from "./svgs/Google";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useStore } from "@/store";
 import Loading from "./ui/Loading";
 
 const LoginForm = () => {
   const [data, setData] = useState<{ [key: string]: any }>({ ...loginData });
-  const { btnLoading, setBtnLoading } = useStore();
+  const [btnLoading, setBtnLoading] = useState(false);
   const router = useRouter();
-
-  // const btnLoading = useStore((state) => state.btnLoading);
-  console.log("btnLoading is ", btnLoading);
 
   const login = async () => {
     try {
@@ -75,16 +71,19 @@ const LoginForm = () => {
         />
 
         <Button onClick={login} className="bg-[rgb(109,84,181)]">
-          {
+          {btnLoading && (
             <Loading
               height="h-full"
               animHeight="h-[80%]"
               animWidth="w-[40px]"
-              className={[btnLoading ? "opacity-100" : "opacity-[0]"]
+              className={[
+                btnLoading ? "opacity-100" : "opacity-[0]",
+                "absolute",
+              ]
                 .filter(Boolean)
                 .join(" ")}
             />
-          }
+          )}
           Log in
         </Button>
         <div className="signup__form__google">

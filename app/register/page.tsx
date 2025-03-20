@@ -27,16 +27,21 @@ const page = () => {
 
   return (
     <div className="register">
-      {(
+      {
         <Loading
           height="h-[100vh]"
           animHeight="h-[200px]"
           animWidth="w-[200px]"
-          className={[loading ? "opacity-100 pointer-events-auto" : "opacity-[0] pointer-events-none"]
+          className={[
+            loading
+              ? "opacity-100 pointer-events-auto"
+              : "opacity-[0] pointer-events-none",
+            "fixed",
+          ]
             .filter(Boolean)
             .join(" ")}
         />
-      )}
+      }
 
       <Header loggedIn />
 

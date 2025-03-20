@@ -13,12 +13,11 @@ import Loading from "./ui/Loading";
 const SignupForm = () => {
   const [data, setData] = useState<{ [key: string]: any }>({ ...signupData });
   const [btnSigningUp, setBtnSigningUp] = useState(false);
-  // const [btnGoogle, setGoogle] = useState(false)
   const router = useRouter();
 
   const signup = async () => {
     try {
-      setBtnSigningUp((prev)=> !prev)
+      setBtnSigningUp((prev) => !prev);
       const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
       const signUpInfo = new FormData();
@@ -36,12 +35,12 @@ const SignupForm = () => {
       if (!response) {
         throw new Error("no signup response received");
       }
-      setBtnSigningUp((prev)=> !prev)
+      setBtnSigningUp((prev) => !prev);
       router.push("register");
     } catch (err: any) {
-      setBtnSigningUp((prev)=> !prev)
-      console.log("signupError",err.response)
+      setBtnSigningUp((prev) => !prev);
       toast.error(err.response.data.message);
+      return;
     }
   };
 
@@ -85,16 +84,19 @@ const SignupForm = () => {
       />
 
       <Button onClick={signup} className="bg-[rgb(109,84,181)]">
-        {
+        {btnSigningUp && (
           <Loading
             height="h-full"
             animHeight="h-[80%]"
             animWidth="w-[40px]"
-            className={[btnSigningUp ? "opacity-100" : "opacity-[0]"]
+            className={[
+              btnSigningUp ? "opacity-100" : "opacity-[0]",
+              "absolute",
+            ]
               .filter(Boolean)
               .join(" ")}
           />
-        }
+        )}
         Create account
       </Button>
       <div className="signup__form__google">
