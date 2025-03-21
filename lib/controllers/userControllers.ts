@@ -3,25 +3,8 @@ import mongoose from "mongoose";
 import { cookies } from "next/headers";
 import { userModel as User } from "../models/userModel";
 import { dataModel as Data } from "../models/dataModel";
+import { handleErrors, handleFormErrors } from "@/scripts";
 import { NextRequest, NextResponse } from "next/server";
-
-//error handling
-const handleErrors = (err: string | string[]) => {
-  //sign up
-  if (err.includes("user validation")) {
-    const error = { email: "", password: "" };
-    if (err.includes("email")) {
-      error.email = "Please enter a valid email";
-      return error.email;
-    }
-    error.password = "Minimum of 6 characters required";
-    return error.password;
-  }
-
-  if (err.includes("duplicate key")) {
-    return "This account is already registered";
-  }
-};
 
 // create jsonwebtoken
 const maxAge = 3 * 24 * 60 * 60;
@@ -150,10 +133,12 @@ export const createUserData = async (req: NextRequest, body: any) => {
       { status: 201 }
     );
   } catch (err: any) {
+    const error = handleFormErrors(err.message);
+    // console.log("create user data error",err.message)
     return NextResponse.json(
       {
         status: "fail",
-        message: err.message,
+        message: error,
       },
       { status: 400 }
     );

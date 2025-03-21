@@ -8,13 +8,16 @@ import Button from "./ui/Button";
 import Google from "./svgs/Google";
 import axios from "axios";
 import { toast } from "react-toastify";
+import Loading from "./ui/Loading";
 
 const LoginForm = () => {
   const [data, setData] = useState<{ [key: string]: any }>({ ...loginData });
+  const [btnLoading, setBtnLoading] = useState(false);
   const router = useRouter();
 
   const login = async () => {
     try {
+      setBtnLoading(true);
       const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
       const loginInfo = new FormData();
@@ -29,15 +32,19 @@ const LoginForm = () => {
         },
       });
       if (!response) {
+        setBtnLoading(false);
         throw new Error("no login response received");
       }
 
       if (response.data.data === `${process.env.NEXT_PUBLIC_ADMIN_ID}`) {
+        setBtnLoading(false);
         router.push("admin/workspace");
       } else {
+        setBtnLoading(false);
         router.push("register");
       }
     } catch (err: any) {
+      setBtnLoading(false);
       toast.error(err.response.data.message);
     }
   };
@@ -64,9 +71,22 @@ const LoginForm = () => {
         />
 
         <Button onClick={login} className="bg-[rgb(109,84,181)]">
+          {btnLoading && (
+            <Loading
+              height="h-full"
+              animHeight="h-[80%]"
+              animWidth="w-[40px]"
+              className={[
+                btnLoading ? "opacity-100" : "opacity-[0]",
+                "absolute",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+            />
+          )}
           Log in
         </Button>
-        <div className="signup__form__google">
+        {/* <div className="signup__form__google">
           <div className="signup__form__text">
             <hr className="line" />
             <p>Or log in with</p>
@@ -78,7 +98,7 @@ const LoginForm = () => {
               <Google /> Google
             </Button>
           </div>
-        </div>
+        </div> */}
       </form>
     </div>
   );

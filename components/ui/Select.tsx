@@ -7,6 +7,7 @@ interface selectProps {
   className?: string;
   name: string;
   options: string[];
+  
   data?: string;
   setData?: React.Dispatch<React.SetStateAction<{ [key: string]: any }>>;
 }
@@ -30,7 +31,7 @@ const Select: React.FC<selectProps> = ({
   return (
     <select
       onChange={selectHandler}
-      className={["input", className].filter(Boolean).join(" ")}
+      className={["select", className].filter(Boolean).join(" ")}
       id={id}
       name={name}
     >

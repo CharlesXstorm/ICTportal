@@ -4,6 +4,7 @@ export interface buttonProps extends PropsWithChildren {
   className?: string;
   type?: "button" | "submit" | "reset";
   href?: string;
+  disabled?: boolean;
   onClick?: () => void;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
@@ -24,6 +25,7 @@ export interface inputProps {
   maxSize?: number;
   maxWidth?: number;
   maxHeight?: number;
+  photoUrl?: string;
   setData?: React.Dispatch<React.SetStateAction<{ [key: string]: any }>>;
   onChange?: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>

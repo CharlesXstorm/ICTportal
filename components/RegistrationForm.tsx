@@ -1,19 +1,99 @@
 "use client";
 
-import React, { useState } from "react";
-// import { toast } from "react-toastify";
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { registerData } from "@/data";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
 import Select from "./ui/Select";
 import Photo from "./ui/Photo";
+import Date from "./ui/Date";
+import { upload_img } from "@/scripts";
+import { useStore } from "@/store";
+import axios from "axios";
+import Loading from "./ui/Loading";
 
 const RegistrationForm = () => {
   const [data, setData] = useState<{ [key: string]: any }>({ ...registerData });
+  const [btnSubmit, setBtnSubmit] = useState(false);
+  const { userInfo, userData, disabled, setDisabled } = useStore();
 
-  const submitHandler = () => {
-    console.log("submitData", data)
+  // let data: { [key: string]: any } = { ...userData };
+
+  const submitHandler = async () => {
+    setBtnSubmit(true);
+    const publicID = `${userInfo?._id.slice(0, 5)}_${
+      userInfo?.firstName
+    }${userInfo?._id.slice(9)}_`;
+
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
+    const API_AUTH = process.env.NEXT_PUBLIC_API_AUTH;
+
+    try {
+      const img_url = await upload_img(data.photo, publicID);
+
+      if (!img_url) {
+        setBtnSubmit(false);
+        toast.error("Please upload an image");
+        return;
+      }
+
+      //create form data here
+      const regInfo = new FormData();
+      // Append all fields from the `data` state to the FormData object
+      Object.keys(data).forEach((key) => {
+        regInfo.append(key, data[key]);
+      });
+
+      regInfo.set("photo", img_url); //reset the photo
+
+      // Send the FormData object to the API via POST request
+      const response = await axios.post(`${API_URL}/user/createData`, regInfo, {
+        headers: {
+          authorization: `Bearer ${API_AUTH}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      if (!response) {
+        throw new Error("error: data not summited");
+      }
+      toast.success("submitted successfully!");
+      setBtnSubmit(false);
+      setDisabled(true)
+      
+    } catch (err: any) {
+      // setBtnSigningUp((prev) => !prev);
+      setBtnSubmit(false);
+      toast.error(err.response.data.message);
+    }
   };
+
+  useEffect(() => {
+    if (userData) {
+      console.log("userData", userData);
+      //setData with userData
+      Object.keys(userData).forEach((el) => {
+        if (el != "user" && el != "__v" && el != "_id") {
+          if (!(typeof userData[el] === "object")) {
+            setData((prev) => {
+              return { ...prev, [el]: userData[el] };
+            });
+          } else {
+            Object.keys(userData[el]).forEach((subEl: any) => {
+              setData((prev) => {
+                return { ...prev, [subEl]: userData[el][subEl] };
+              });
+              return;
+            });
+          }
+        }
+      });
+    } else {
+      
+      console.log("no user data", userData);
+    }
+  }, [userData]);
 
   return (
     <form className="signup__form">
@@ -31,6 +111,7 @@ const RegistrationForm = () => {
             name="photo"
             accept="image/png, image/jpg, image/jpeg"
             maxSize={200}
+            photoUrl={data.photo}
             setData={setData}
           />
         </div>
@@ -44,6 +125,7 @@ const RegistrationForm = () => {
           value={data.lastName}
           setData={setData}
           autoComplete="family-name"
+          disabled={disabled}
         />
         <Input
           type="text"
@@ -52,6 +134,7 @@ const RegistrationForm = () => {
           value={data.firstName}
           setData={setData}
           autoComplete="given-name"
+          disabled={disabled}
         />
       </div>
 
@@ -63,6 +146,7 @@ const RegistrationForm = () => {
           value={data.otherName}
           setData={setData}
           autoComplete="additional-name"
+          disabled={disabled}
         />
         <Select
           className="w-[50%]"
@@ -73,10 +157,11 @@ const RegistrationForm = () => {
       </div>
 
       <div className="signup__form__group">
-        <Input
+        <Date
           type="date"
           name="dateOfBirth"
           placeholder="Date of Birth*"
+          value={data.dateOfBirth}
           setData={setData}
           autoComplete="bday"
         />
@@ -87,6 +172,7 @@ const RegistrationForm = () => {
           value={data.mobileNumber}
           setData={setData}
           autoComplete="tel"
+          disabled={disabled}
         />
       </div>
 
@@ -98,6 +184,7 @@ const RegistrationForm = () => {
           value={data.nationality}
           setData={setData}
           autoComplete="country-name"
+          disabled={disabled}
         />
         <Input
           type="text"
@@ -106,6 +193,7 @@ const RegistrationForm = () => {
           value={data.stateOfOrigin}
           setData={setData}
           autoComplete="state"
+          disabled={disabled}
         />
       </div>
 
@@ -116,6 +204,7 @@ const RegistrationForm = () => {
           placeholder="L.G.A*"
           value={data.localGovArea}
           setData={setData}
+          disabled={disabled}
         />
         <Input
           type="text"
@@ -123,6 +212,7 @@ const RegistrationForm = () => {
           placeholder="Town*"
           value={data.town}
           setData={setData}
+          disabled={disabled}
         />
       </div>
 
@@ -135,6 +225,7 @@ const RegistrationForm = () => {
         value={data.email}
         setData={setData}
         autoComplete="email"
+        disabled={disabled}
       />
       <Input
         type="text"
@@ -143,6 +234,7 @@ const RegistrationForm = () => {
         value={data.resAddress}
         setData={setData}
         autoComplete="street-address"
+        disabled={disabled}
       />
 
       <div className="signup__form__item">
@@ -162,6 +254,7 @@ const RegistrationForm = () => {
           placeholder="Choice of program*"
           value={data.choice}
           setData={setData}
+          disabled={disabled}
         />
       </div>
 
@@ -173,6 +266,7 @@ const RegistrationForm = () => {
           placeholder="Date of commencement*"
           value={data.startDate}
           setData={setData}
+          disabled={disabled}
         />
         <Input
           type="text"
@@ -180,6 +274,7 @@ const RegistrationForm = () => {
           placeholder="Expected date of graduation*"
           value={data.endDate}
           setData={setData}
+          disabled={disabled}
         />
       </div>
 
@@ -191,6 +286,7 @@ const RegistrationForm = () => {
           placeholder="Background 1*"
           value={data.background1}
           setData={setData}
+          disabled={disabled}
         />
         <Input
           type="text"
@@ -198,6 +294,7 @@ const RegistrationForm = () => {
           placeholder="Background 2*"
           value={data.background2}
           setData={setData}
+          disabled={disabled}
         />
       </div>
 
@@ -209,6 +306,7 @@ const RegistrationForm = () => {
           placeholder="Referee Name 1*"
           value={data.name1}
           setData={setData}
+          disabled={disabled}
         />
         <Input
           type="text"
@@ -216,6 +314,7 @@ const RegistrationForm = () => {
           placeholder="Referee Phone number 1*"
           value={data.phoneNumber1}
           setData={setData}
+          disabled={disabled}
         />
       </div>
       <div className="signup__form__item">
@@ -225,6 +324,7 @@ const RegistrationForm = () => {
           placeholder="Relationship*"
           value={data.relationship1}
           setData={setData}
+          disabled={disabled}
         />
       </div>
 
@@ -235,6 +335,7 @@ const RegistrationForm = () => {
           placeholder="Referee Name 2*"
           value={data.name2}
           setData={setData}
+          disabled={disabled}
         />
         <Input
           type="text"
@@ -242,6 +343,7 @@ const RegistrationForm = () => {
           placeholder="Referee Phone number 2*"
           value={data.phoneNumber2}
           setData={setData}
+          disabled={disabled}
         />
       </div>
       <div className="signup__form__item">
@@ -251,6 +353,7 @@ const RegistrationForm = () => {
           placeholder="Relationship*"
           value={data.relationship2}
           setData={setData}
+          disabled={disabled}
         />
       </div>
 
@@ -262,8 +365,22 @@ const RegistrationForm = () => {
         this Center as it concerns this training program.
       </p>
 
-      <Button onClick={submitHandler} className="bg-[rgb(109,84,181)]">
-        Submit
+      <Button
+        onClick={submitHandler}
+        // className="bg-[rgb(109,84,181)]"
+        disabled={disabled}
+      >
+        {btnSubmit && (
+          <Loading
+            height="h-full"
+            animHeight="h-[80%]"
+            animWidth="w-[40px]"
+            className={[btnSubmit ? "opacity-100" : "opacity-[0]", "absolute"]
+              .filter(Boolean)
+              .join(" ")}
+          />
+        )}
+        {disabled ? "Already submitted!" : "Submit"}
       </Button>
     </form>
   );

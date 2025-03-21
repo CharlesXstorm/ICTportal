@@ -11,6 +11,12 @@ const Slide = () => {
     <>
       {
         <div className="slide">
+          {/* <Desktop className={[
+              "object-contain scale-[1.2]",
+              `${isMobile ? "hidden" : "flex absolute bottom-[5%]"}`,
+            ]
+              .filter(Boolean)
+              .join(" ")} /> */}
           <Image
             alt="slide1"
             src="/images/slide1.jpg"
@@ -22,7 +28,7 @@ const Slide = () => {
               .filter(Boolean)
               .join(" ")}
           />
-          <Header className="lg:absolute lg:left-0" />
+          <Header className="lg:absolute top-0 lg:left-0" />
         </div>
       }
     </>

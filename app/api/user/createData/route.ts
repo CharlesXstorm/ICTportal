@@ -2,6 +2,7 @@ import connectToDatabase from "../../../../lib/mongodb";
 import { NextRequest, NextResponse } from "next/server";
 import { userModel as User } from "../../../../lib/models/userModel";
 import { createUserData } from "../../../../lib/controllers/userControllers";
+import { formatFormatData } from "@/scripts";
 
 export async function POST(req: NextRequest) {
   //get user from header, add user to existing body and call controller
@@ -20,12 +21,15 @@ export async function POST(req: NextRequest) {
         throw new Error("user doesn't exist");
       }
 
-      let body = await req.json();
+      const formData = await req.formData();
+
+      const body = formatFormatData(formData, user);
+
       if (!body) {
-        throw new Error("unable to parse body");
+        throw new Error("unable to format form");
       }
 
-      body = { user, ...body };
+      // return NextResponse.json({ status: body }, { status: 201 });
       const createDataRes = await createUserData(req, body);
       return createDataRes;
     } else {
