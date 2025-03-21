@@ -7,6 +7,7 @@ interface selectProps {
   className?: string;
   name: string;
   options: string[];
+  
   data?: string;
   setData?: React.Dispatch<React.SetStateAction<{ [key: string]: any }>>;
 }

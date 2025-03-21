@@ -65,3 +65,26 @@ export const tableHead = [
   "Ref_2_Phone_Num",
   "Ref_2_Relation",
 ];
+
+export const programs = [
+  { name: "Computer Appreciation", duration: "3 Months" },
+  { name: "Microsoft Word", duration: "3 Months" },
+  { name: "Microsoft Access", duration: "3 Months" },
+  { name: "Microsoft Excel", duration: "3 Months" },
+  { name: "Microsoft PowerPoint", duration: "3 Months" },
+  { name: "Desktop Publishing", duration: "3 Months" },
+  { name: "Corel Draw", duration: "3 Months" },
+  { name: "Internet", duration: "3 Months" },
+  { name: "Digital Marketing", duration: "3 Months" },
+  { name: "Copy Writing", duration: "3 Months" },
+  { name: "Multimedia and Animation", duration: "3 Months" },
+  { name: "Video Editing", duration: "3 Months" },
+  { name: "Web Designing (UI/UX)", duration: "6 Months" },
+  { name: "Data Science", duration: "6 Months" },
+  { name: "Cybersecurity", duration: "6 Months" },
+  { name: "Data Analytics", duration: "6 Months" },
+  { name: "Web and Mobile Apps Development", duration: "6 Months" },
+  { name: "Graphics Designing", duration: "6 Months" },
+  { name: "Internet of Things", duration: "6 Months" },
+  { name: "Cloud Computing", duration: "6 Months" },
+];

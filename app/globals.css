@@ -203,7 +203,7 @@ select {
 }
 
 .slide {
-  @apply relative bg-gradient-to-b from-[rgba(53,20,101,0.9)] to-[rgba(255,0,0,0.2)] flex-col w-full lg:w-[50%] lg:h-full rounded-[6px] lg:overflow-hidden;
+  @apply relative bg-gradient-to-b from-[rgba(53,20,101,0.9)] to-[rgb(44,38,56)] flex flex-col w-full lg:w-[50%] lg:h-full items-center rounded-[6px] lg:overflow-hidden;
 }
 
 .table-container {

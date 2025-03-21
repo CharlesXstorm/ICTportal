@@ -161,6 +161,7 @@ const RegistrationForm = () => {
           type="date"
           name="dateOfBirth"
           placeholder="Date of Birth*"
+          value={data.dateOfBirth}
           setData={setData}
           autoComplete="bday"
         />

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 interface inputProps {
   id?: string;
@@ -21,7 +21,7 @@ const Date: React.FC<inputProps> = ({
   setData,
   autoComplete,
 }) => {
-  const [dataValue, setDataValue] = useState("Date of Birth");
+  const [dataValue, setDataValue] = useState(value || "Date of Birth");
   const inputRef = useRef<HTMLInputElement>(null);
 
   const clickHandler = () => {
@@ -39,6 +39,12 @@ const Date: React.FC<inputProps> = ({
       });
     }
   };
+
+  useEffect(()=>{
+    if(value){
+      setDataValue(value);
+    }
+  },[value])
 
   return (
     <div className="date">
