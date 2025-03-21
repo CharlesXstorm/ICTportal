@@ -5,8 +5,8 @@ interface TbodyProps {
 }
 
 const TableBody: React.FC<TbodyProps> = ({ row }) => {
-  let elKeys: string[] = [];
-  let subKeys: string[] = [];
+  const elKeys: string[] = [];
+  const subKeys: string[] = [];
   let bodyKeys: string[] = [];
 
   Object.keys(row).forEach((el) => {

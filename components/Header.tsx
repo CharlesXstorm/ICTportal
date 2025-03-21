@@ -4,7 +4,6 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useStore } from "@/store";
-import { registerData } from "@/data";
 
 interface headerProps {
   className?: string;

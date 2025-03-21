@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { signupData } from "@/data";
 import Input from "./ui/Input";
 import Button from "./ui/Button";
-import Google from "./svgs/Google";
+// import Google from "./svgs/Google";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Loading from "./ui/Loading";
