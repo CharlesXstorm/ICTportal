@@ -4,6 +4,7 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useStore } from "@/store";
+import { registerData } from "@/data";
 
 interface headerProps {
   className?: string;
@@ -16,8 +17,14 @@ const Header: React.FC<headerProps> = ({
   loggedIn = false,
   admin = false,
 }) => {
-  const { userInfo, setUserInfo, setUserData, setAdminData, setLoading } =
-    useStore();
+  const {
+    userInfo,
+    setUserInfo,
+    setUserData,
+    setAdminData,
+    setLoading,
+    setDisabled,
+  } = useStore();
   const router = useRouter();
 
   const getUserInfo = async () => {
@@ -55,10 +62,12 @@ const Header: React.FC<headerProps> = ({
         throw new Error("no data in database");
       }
       setUserData(response.data.data);
+      setDisabled(true);
       setLoading(false);
-      // setLoaded(!loaded)
-      // console.log("userData response", response.data.data);
     } catch (err: any) {
+      // setUserData({ ...registerData });
+      // setUserData(null);
+      // setDisabled(false);
       console.log("error", err.message);
     }
   };
@@ -68,7 +77,6 @@ const Header: React.FC<headerProps> = ({
       const API_URL = process.env.NEXT_PUBLIC_API_URL;
       const API_AUTH = process.env.NEXT_PUBLIC_API_AUTH;
 
-      // console.log("get userData","API_AUTH",API_AUTH)
       const response = await axios.get(`${API_URL}/getAllData`, {
         headers: { authorization: `Bearer ${API_AUTH}` },
       });
@@ -79,8 +87,6 @@ const Header: React.FC<headerProps> = ({
       }
       setAdminData(response.data.data);
       setLoading(false);
-      // setLoaded(!loaded)
-      // console.log("AllData response", response.data.data);
     } catch (err: any) {
       console.log("error", err.message);
     }
@@ -96,6 +102,8 @@ const Header: React.FC<headerProps> = ({
         throw new Error("no logout response received");
       }
       setLoading(true);
+      setUserData(null);
+      setDisabled(false);
       router.push("/login");
     } catch (err: any) {
       console.log("error", err.response.data.message);

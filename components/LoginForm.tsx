@@ -86,7 +86,7 @@ const LoginForm = () => {
           )}
           Log in
         </Button>
-        <div className="signup__form__google">
+        {/* <div className="signup__form__google">
           <div className="signup__form__text">
             <hr className="line" />
             <p>Or log in with</p>
@@ -98,7 +98,7 @@ const LoginForm = () => {
               <Google /> Google
             </Button>
           </div>
-        </div>
+        </div> */}
       </form>
     </div>
   );

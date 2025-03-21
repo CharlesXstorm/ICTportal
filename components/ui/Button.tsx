@@ -9,14 +9,16 @@ const Button: React.FC<buttonProps> = ({
   className,
   type = "button",
   onClick,
+  disabled
 }) => {
   // const btnLoading = useStore((state) => state.btnLoading);
   // console.log("btnLoading is ",btnLoading)
   return (
     <button
-      className={[className, "button"].filter(Boolean).join(" ")}
+      className={[className, "button", disabled?"bg-[rgb(163, 163, 163)]":"bg-[rgb(109,84,181)]" ].filter(Boolean).join(" ")}
       type={type}
       onClick={onClick}
+      disabled={disabled}
     >
       {/* {
         <Loading

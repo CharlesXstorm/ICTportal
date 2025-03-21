@@ -99,7 +99,7 @@ const SignupForm = () => {
         )}
         Create account
       </Button>
-      <div className="signup__form__google">
+      {/* <div className="signup__form__google">
         <div className="signup__form__text">
           <hr className="line" />
           <p>Or register with</p>
@@ -111,7 +111,7 @@ const SignupForm = () => {
             <Google /> Google
           </Button>
         </div>
-      </div>
+      </div> */}
     </form>
   );
 };

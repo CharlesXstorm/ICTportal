@@ -10,6 +10,7 @@ interface inputProps {
   placeholder: string;
   setData?: React.Dispatch<React.SetStateAction<{ [key: string]: any }>>;
   autoComplete?: React.HTMLInputAutoCompleteAttribute;
+  disabled?: boolean;
 }
 
 const Input: React.FC<inputProps> = ({
@@ -20,6 +21,7 @@ const Input: React.FC<inputProps> = ({
   placeholder,
   setData,
   autoComplete,
+  disabled,
 }) => {
   const inputRef = useRef(null);
 
@@ -31,14 +33,14 @@ const Input: React.FC<inputProps> = ({
     }
   };
 
-//   const addHolder = (e:any) => {
-//     // console.log("on blurr")
-//  console.log("on blurr", e)
-//   };
+  //   const addHolder = (e:any) => {
+  //     // console.log("on blurr")
+  //  console.log("on blurr", e)
+  //   };
 
-//   const removeHolder = () => {
-//     // console.log("on focuss")
-//   };
+  //   const removeHolder = () => {
+  //     // console.log("on focuss")
+  //   };
 
   return (
     <>
@@ -50,10 +52,9 @@ const Input: React.FC<inputProps> = ({
         name={name}
         value={value}
         placeholder={placeholder}
-        // onFocus={() => type === "date" && removeHolder()}
-        // onBlur={(e) => type === "date" && addHolder(e)}
         onChange={changeHandler}
         autoComplete={autoComplete}
+        disabled={disabled}
       />
     </>
   );

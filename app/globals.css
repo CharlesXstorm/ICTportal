@@ -31,6 +31,18 @@ body {
   font-family: jost, Arial, Helvetica, sans-serif;
 }
 
+.admin {
+  @apply relative flex flex-col justify-center items-center bg-[rgb(44,38,56)] px-2 w-full gap-2;
+}
+
+.admin__container {
+  @apply w-full px-4;
+}
+
+.admin__title {
+  @apply text-2xl py-4;
+}
+
 .button {
   @apply relative w-full flex justify-center items-center gap-2 cursor-pointer rounded-[6px] my-2 p-2;
 }
@@ -192,6 +204,36 @@ select {
 
 .slide {
   @apply relative bg-gradient-to-b from-[rgba(53,20,101,0.9)] to-[rgba(255,0,0,0.2)] flex-col w-full lg:w-[50%] lg:h-full rounded-[6px] lg:overflow-hidden;
+}
+
+.table-container {
+  min-height: 100vh;
+  overflow-x: auto;
+  color: #000;
+  /* background-color: #d0d0d0; */
+
+}
+
+table {
+  border-collapse: collapse;
+  border: 2px solid #000;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
+  background-color: #f2f2f2;
+  /* min-width: 600px; */
+}
+
+table th, table td {
+ @apply border-[1px] border-[#ddd] p-[8px] text-left;
+}
+
+tr{
+  @apply hover:bg-[#d0d0d0] cursor-pointer;
+}
+
+table th {
+  background-color: #9e9e9e;
 }
 
 .upload__image{

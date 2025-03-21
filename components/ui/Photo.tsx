@@ -5,11 +5,13 @@ import { toast } from "react-toastify";
 import { inputProps } from "@/types";
 import { image, Svg } from "../svgs";
 import { uiscript } from "@/scripts";
+import { useStore } from "@/store";
 
 const Photo: React.FC<inputProps> = ({
   className,
   type,
   name,
+  photoUrl,
   setData,
   accept,
   maxFile = 1,
@@ -19,6 +21,7 @@ const Photo: React.FC<inputProps> = ({
 }) => {
   const [info, setInfo] = useState<any[]>([]);
   const [bgImage, setBgImage] = useState("");
+  const { userData, disabled } = useStore();
 
   ///////////////processFile/////////////////
   const processFile = async (files: FileList) => {
@@ -32,9 +35,7 @@ const Photo: React.FC<inputProps> = ({
     if (res) {
       if (typeof res === "string") {
         toast.error(res);
-        // setError(res);
       } else {
-        // error.length > 0 ? setError("") : null;
         setInfo((prev) => [...prev, ...res]);
       }
     }
@@ -42,32 +43,45 @@ const Photo: React.FC<inputProps> = ({
   //////////////////////////////////////////////
 
   useEffect(() => {
-    if (info) {
-      const file = info[info.length - 1];
+    if (userData) {
+      
+      setBgImage(`url(${photoUrl})`);
+    } else {
+      if (info) {
+        const file = info[info.length - 1];
 
-      if (file) {
-        const reader = new FileReader();
+        if (file) {
+          const reader = new FileReader();
 
-        // Set the background image when the file is loaded
-        reader.onload = () => {
-          if (reader.result) {
-            if (setData) {
-              setData((prev) => {
-                return { ...prev, photo: reader.result };
-              });
+          // Set the background image when the file is loaded
+          reader.onload = () => {
+            if (reader.result) {
+              if (setData) {
+                setData((prev) => {
+                  return { ...prev, photo: reader.result };
+                });
+              }
+              setBgImage(`url(${reader.result})`);
             }
-            setBgImage(`url(${reader.result})`);
-          }
-        };
+          };
 
-        // Read the file as a data URL
-        reader.readAsDataURL(file);
+          // Read the file as a data URL
+          reader.readAsDataURL(file);
+        }
       }
     }
-  }, [info]);
+  }, [info,userData,photoUrl]);
 
   return (
-    <div className={["photo_upload", className].filter(Boolean).join(" ")}>
+    <div
+      className={[
+        "photo_upload",
+        className,
+        disabled ? "pointer-events-none" : "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
       <div
         onClick={uiscript.click}
         onDragOver={(e) => {
