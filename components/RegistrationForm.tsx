@@ -15,10 +15,11 @@ import Loading from "./ui/Loading";
 
 const RegistrationForm = () => {
   const [data, setData] = useState<{ [key: string]: any }>({ ...registerData });
-  const [btnSubmit, setBtnSubmit] = useState(false);
-  const { userInfo, userData, disabled, setDisabled } = useStore();
+  const [btnSubmit] = useState(false);
+    const { userData, disabled } = useStore();
 
-  // let data: { [key: string]: any } = { ...userData };
+    // const [btnSubmit, setBtnSubmit] = useState(false);
+  // const { userInfo, userData, disabled, setDisabled } = useStore();
 
   // const submitHandler = async () => {
   //   setBtnSubmit(true);
