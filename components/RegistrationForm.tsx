@@ -18,8 +18,6 @@ const RegistrationForm = () => {
   const [btnSubmit, setBtnSubmit] = useState(false);
   const { userInfo, userData, disabled, setDisabled } = useStore();
 
-  // let data: { [key: string]: any } = { ...userData };
-
   const submitHandler = async () => {
     setBtnSubmit(true);
     const publicID = `${userInfo?._id.slice(0, 5)}_${
@@ -60,8 +58,7 @@ const RegistrationForm = () => {
       }
       toast.success("submitted successfully!");
       setBtnSubmit(false);
-      setDisabled(true)
-      
+      setDisabled(true);
     } catch (err: any) {
       // setBtnSigningUp((prev) => !prev);
       setBtnSubmit(false);
@@ -90,7 +87,6 @@ const RegistrationForm = () => {
         }
       });
     } else {
-      
       console.log("no user data", userData);
     }
   }, [userData]);
@@ -367,7 +363,6 @@ const RegistrationForm = () => {
 
       <Button
         onClick={submitHandler}
-        // className="bg-[rgb(109,84,181)]"
         disabled={disabled}
       >
         {btnSubmit && (

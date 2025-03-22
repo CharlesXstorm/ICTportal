@@ -1,5 +1,5 @@
 import axios from "axios";
-import crypto from "crypto-js";
+import crypto from "crypto";
 
 export const upload_img = async (
   selectedImage: any = null,
@@ -27,7 +27,8 @@ export const upload_img = async (
 
     // Generate signature
     const signatureString = `public_id=${publicID}&timestamp=${timestamp}&upload_preset=${uploadPreset}${apiSecret}`;
-    const signature = crypto.SHA1(signatureString).toString();
+    const signature = crypto.createHash("sha1").update(signatureString).digest("hex");
+    // const signature = crypto.SHA1(signatureString).toString();
     formData.append("signature", signature);
 
     const response = await axios.post(
