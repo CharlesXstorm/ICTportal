@@ -1,74 +1,70 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { registerData } from "@/data";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
 import Select from "./ui/Select";
 import Photo from "./ui/Photo";
 import Date from "./ui/Date";
-// import { upload_img } from "@/scripts";
+import { upload_img } from "@/scripts";
 import { useStore } from "@/store";
-// import axios from "axios";
+import axios from "axios";
 import Loading from "./ui/Loading";
 
 const RegistrationForm = () => {
   const [data, setData] = useState<{ [key: string]: any }>({ ...registerData });
-  const [btnSubmit] = useState(false);
-    const { userData, disabled } = useStore();
+  const [btnSubmit, setBtnSubmit] = useState(false);
+  const { userInfo, userData, disabled, setDisabled } = useStore();
 
-    // const [btnSubmit, setBtnSubmit] = useState(false);
-  // const { userInfo, userData, disabled, setDisabled } = useStore();
+  const submitHandler = async () => {
+    setBtnSubmit(true);
+    const publicID = `${userInfo?._id.slice(0, 5)}_${
+      userInfo?.firstName
+    }${userInfo?._id.slice(9)}_`;
 
-  // const submitHandler = async () => {
-  //   setBtnSubmit(true);
-  //   const publicID = `${userInfo?._id.slice(0, 5)}_${
-  //     userInfo?.firstName
-  //   }${userInfo?._id.slice(9)}_`;
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
+    const API_AUTH = process.env.NEXT_PUBLIC_API_AUTH;
 
-  //   const API_URL = process.env.NEXT_PUBLIC_API_URL;
-  //   const API_AUTH = process.env.NEXT_PUBLIC_API_AUTH;
+    try {
+      const img_url = await upload_img(data.photo, publicID);
 
-  //   try {
-  //     const img_url = await upload_img(data.photo, publicID);
+      if (!img_url) {
+        setBtnSubmit(false);
+        toast.error("Please upload an image");
+        return;
+      }
 
-  //     if (!img_url) {
-  //       setBtnSubmit(false);
-  //       toast.error("Please upload an image");
-  //       return;
-  //     }
+      //create form data here
+      const regInfo = new FormData();
+      // Append all fields from the `data` state to the FormData object
+      Object.keys(data).forEach((key) => {
+        regInfo.append(key, data[key]);
+      });
 
-  //     //create form data here
-  //     const regInfo = new FormData();
-  //     // Append all fields from the `data` state to the FormData object
-  //     Object.keys(data).forEach((key) => {
-  //       regInfo.append(key, data[key]);
-  //     });
+      regInfo.set("photo", img_url); //reset the photo
 
-  //     regInfo.set("photo", img_url); //reset the photo
+      // Send the FormData object to the API via POST request
+      const response = await axios.post(`${API_URL}/user/createData`, regInfo, {
+        headers: {
+          authorization: `Bearer ${API_AUTH}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
-  //     // Send the FormData object to the API via POST request
-  //     const response = await axios.post(`${API_URL}/user/createData`, regInfo, {
-  //       headers: {
-  //         authorization: `Bearer ${API_AUTH}`,
-  //         "Content-Type": "multipart/form-data",
-  //       },
-  //     });
-
-  //     if (!response) {
-  //       throw new Error("error: data not summited");
-  //     }
-  //     toast.success("submitted successfully!");
-  //     setBtnSubmit(false);
-  //     setDisabled(true)
-      
-  //   } catch (err: any) {
-  //     // setBtnSigningUp((prev) => !prev);
-  //     setBtnSubmit(false);
-  //     toast.error(err.response.data.message);
-  //   }
-  // };
+      if (!response) {
+        throw new Error("error: data not summited");
+      }
+      toast.success("submitted successfully!");
+      setBtnSubmit(false);
+      setDisabled(true);
+    } catch (err: any) {
+      // setBtnSigningUp((prev) => !prev);
+      setBtnSubmit(false);
+      toast.error(err.response.data.message);
+    }
+  };
 
   useEffect(() => {
     if (userData) {
@@ -91,7 +87,6 @@ const RegistrationForm = () => {
         }
       });
     } else {
-      
       console.log("no user data", userData);
     }
   }, [userData]);
@@ -367,7 +362,7 @@ const RegistrationForm = () => {
       </p>
 
       <Button
-        // onClick={submitHandler}
+        onClick={submitHandler}
         disabled={disabled}
       >
         {btnSubmit && (
