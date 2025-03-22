@@ -60,7 +60,7 @@ export const handleFormErrors = (err: string | string[]) => {
       error.town = "Please enter a town";
       return error.town;
     case err.includes("email"):
-      error.email = "Please enter a email";
+      error.email = "Please enter an email";
       return error.email;
     case err.includes("resAddress"):
       error.resAddress = "Please enter a residential address";
@@ -75,7 +75,7 @@ export const handleFormErrors = (err: string | string[]) => {
       error.startDate = "Please select a start date";
       return error.startDate;
     case err.includes("endDate"):
-      error.endDate = "Please select a end date";
+      error.endDate = "Please select an end date";
       return error.endDate;
     case err.includes("background1"):
       error.background1 = "Please enter your first educational background";

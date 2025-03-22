@@ -50,6 +50,7 @@ const Date: React.FC<inputProps> = ({
     <div className="date">
       <button onClick={clickHandler} type="button" className="date__button">
         {dataValue}
+        <span className="self-right w-[1.2em]"><img src="/svg/down-arrow-black.svg" alt="arrown_down" /></span>
       </button>
       <input
         ref={inputRef}

@@ -48,11 +48,11 @@ body {
 }
 
 .date{
-@apply relative flex flex-col justify-center w-[50%] lg:w-full rounded-[6px] bg-[rgb(60,54,76)]
+@apply relative flex flex-col justify-center w-[50%] lg:w-full rounded-[6px] bg-zinc-100;
 }
 
 .date__button{
- @apply pl-[8px] w-full text-left
+ @apply flex px-[8px] w-full items-center justify-between
 }
 
 .header {
@@ -69,6 +69,10 @@ body {
 
 .input {
   @apply bg-[rgb(60,54,76)] px-2 py-1 text-sm w-full rounded-[6px] focus:outline-[rgba(255,255,255,0.8)] focus:outline-[1px];
+}
+
+.input__reg {
+  @apply bg-zinc-100 px-2 py-1 text-sm w-full rounded-[6px] border-[1px] border-[rgb(60,54,76)] focus:outline-[rgba(255,255,255,0.8)] focus:outline-[1px];
 }
 
 /* .loadingClass{
@@ -125,11 +129,15 @@ body {
 }
 
 .register__container {
-  @apply w-full px-4 lg:px-0 lg:w-[50%];
+  @apply w-full lg:px-0 lg:w-[50%];
 }
 
 .register__title {
-  @apply text-2xl py-4;
+  @apply text-2xl py-4 px-5;
+}
+
+.register__form {
+  @apply flex flex-col rounded-[6px] py-10 px-5 gap-4 w-[100%] bg-white text-black;
 }
 
 /* #loginPass::-ms-reveal {
@@ -137,14 +145,14 @@ body {
 } */
 
 .select{
-@apply bg-[rgb(60,54,76)] px-2 py-1 text-sm w-[50%] lg:w-full rounded-[6px] focus:outline-[rgba(255,255,255,0.8)] focus:outline-[1px]; 
+@apply bg-zinc-100 px-2 py-1 text-sm w-[50%] lg:w-full rounded-[6px] focus:outline-[rgba(255,255,255,0.8)] focus:outline-[1px]; 
 }
 
 select {
   appearance: none; /* Remove the default arrow */
   -webkit-appearance: none;
   -moz-appearance: none;
-  background-image: url("/svg/down-arrow.svg");
+  background-image: url("/svg/down-arrow-black.svg");
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 20px;
@@ -167,7 +175,7 @@ select {
 }
 
 .signup__form {
-  @apply flex flex-col my-10 gap-4 w-[100%];
+  @apply flex flex-col rounded-[6px] py-10 gap-4 w-[100%];
 }
 
 .signup__form__group {

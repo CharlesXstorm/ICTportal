@@ -35,11 +35,11 @@ const SignupForm = () => {
       if (!response) {
         throw new Error("no signup response received");
       }
-      setBtnSigningUp((prev) => !prev);
       router.push("register");
-    } catch (err: any) {
       setBtnSigningUp((prev) => !prev);
+    } catch (err: any) {
       toast.error(err.response.data.message);
+      setBtnSigningUp((prev) => !prev);
       return;
     }
   };
@@ -49,6 +49,7 @@ const SignupForm = () => {
       <div className="signup__form__group">
         <Input
           name="firstName"
+          className="input"
           value={data.firstName}
           type="text"
           placeholder="First name"
@@ -57,6 +58,7 @@ const SignupForm = () => {
         />
         <Input
           name="lastName"
+          className="input"
           value={data.lastName}
           type="text"
           placeholder="Last name"
@@ -67,6 +69,7 @@ const SignupForm = () => {
 
       <Input
         name="email"
+        className="input"
         value={data.email}
         type="email"
         placeholder="Email"
@@ -75,6 +78,7 @@ const SignupForm = () => {
       />
       <Input
         name="password"
+        className="input"
         value={data.password}
         id="signupPass"
         type="password"

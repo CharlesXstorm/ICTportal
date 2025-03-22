@@ -37,15 +37,15 @@ const LoginForm = () => {
       }
 
       if (response.data.data === `${process.env.NEXT_PUBLIC_ADMIN_ID}`) {
-        setBtnLoading(false);
         router.push("admin/workspace");
-      } else {
         setBtnLoading(false);
+      } else {
         router.push("register");
+        setBtnLoading(false);
       }
     } catch (err: any) {
-      setBtnLoading(false);
       toast.error(err.response.data.message);
+      setBtnLoading(false);
     }
   };
 
@@ -54,6 +54,7 @@ const LoginForm = () => {
       <form className="signup__form">
         <Input
           name="email"
+          className="input"
           value={data.email}
           type="email"
           placeholder="Email"
@@ -62,6 +63,7 @@ const LoginForm = () => {
         />
         <Input
           name="password"
+          className="input"
           value={data.password}
           id="loginPass"
           type="password"

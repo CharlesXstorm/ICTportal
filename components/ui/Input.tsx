@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 
 interface inputProps {
   id?: string;
+  className: string;
   type: string;
   name?: string;
   value?: string;
@@ -15,6 +16,7 @@ interface inputProps {
 
 const Input: React.FC<inputProps> = ({
   id,
+  className,
   type,
   name,
   value,
@@ -47,7 +49,7 @@ const Input: React.FC<inputProps> = ({
       <input
         ref={inputRef}
         id={id}
-        className="input"
+        className={className}
         type={type}
         name={name}
         value={value}
