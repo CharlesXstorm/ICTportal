@@ -92,7 +92,7 @@ const RegistrationForm = () => {
   }, [userData]);
 
   return (
-    <form className="signup__form">
+    <form className="register__form">
       <div className="signup__form__photo">
         <div className="signup__form__photo__content">
           <p className="text-sm">
@@ -117,6 +117,7 @@ const RegistrationForm = () => {
         <Input
           type="text"
           name="lastName"
+          className="input__reg"
           placeholder="Last name*"
           value={data.lastName}
           setData={setData}
@@ -126,6 +127,7 @@ const RegistrationForm = () => {
         <Input
           type="text"
           name="firstName"
+          className="input__reg"
           placeholder="First name*"
           value={data.firstName}
           setData={setData}
@@ -138,6 +140,7 @@ const RegistrationForm = () => {
         <Input
           type="text"
           name="otherName"
+          className="input__reg"
           placeholder="Other name"
           value={data.otherName}
           setData={setData}
@@ -164,6 +167,7 @@ const RegistrationForm = () => {
         <Input
           type="text"
           name="mobileNumber"
+          className="input__reg"
           placeholder="Mobile number*"
           value={data.mobileNumber}
           setData={setData}
@@ -176,6 +180,7 @@ const RegistrationForm = () => {
         <Input
           type="text"
           name="nationality"
+          className="input__reg"
           placeholder="Nationality*"
           value={data.nationality}
           setData={setData}
@@ -185,6 +190,7 @@ const RegistrationForm = () => {
         <Input
           type="text"
           name="stateOfOrigin"
+          className="input__reg"
           placeholder="State of Origin*"
           value={data.stateOfOrigin}
           setData={setData}
@@ -197,6 +203,7 @@ const RegistrationForm = () => {
         <Input
           type="text"
           name="localGovArea"
+          className="input__reg"
           placeholder="L.G.A*"
           value={data.localGovArea}
           setData={setData}
@@ -205,6 +212,7 @@ const RegistrationForm = () => {
         <Input
           type="text"
           name="town"
+          className="input__reg"
           placeholder="Town*"
           value={data.town}
           setData={setData}
@@ -217,6 +225,7 @@ const RegistrationForm = () => {
       <Input
         type="email"
         name="email"
+        className="input__reg"
         placeholder="Email*"
         value={data.email}
         setData={setData}
@@ -226,6 +235,7 @@ const RegistrationForm = () => {
       <Input
         type="text"
         name="resAddress"
+        className="input__reg"
         placeholder="Residential address*"
         value={data.resAddress}
         setData={setData}
@@ -247,6 +257,7 @@ const RegistrationForm = () => {
         <Input
           type="text"
           name="choice"
+          className="input__reg"
           placeholder="Choice of program*"
           value={data.choice}
           setData={setData}
@@ -259,6 +270,7 @@ const RegistrationForm = () => {
         <Input
           type="text"
           name="startDate"
+          className="input__reg"
           placeholder="Date of commencement*"
           value={data.startDate}
           setData={setData}
@@ -267,6 +279,7 @@ const RegistrationForm = () => {
         <Input
           type="text"
           name="endDate"
+          className="input__reg"
           placeholder="Expected date of graduation*"
           value={data.endDate}
           setData={setData}
@@ -279,6 +292,7 @@ const RegistrationForm = () => {
         <Input
           type="text"
           name="background1"
+          className="input__reg"
           placeholder="Background 1*"
           value={data.background1}
           setData={setData}
@@ -287,6 +301,7 @@ const RegistrationForm = () => {
         <Input
           type="text"
           name="background2"
+          className="input__reg"
           placeholder="Background 2*"
           value={data.background2}
           setData={setData}
@@ -299,6 +314,7 @@ const RegistrationForm = () => {
         <Input
           type="text"
           name="name1"
+          className="input__reg"
           placeholder="Referee Name 1*"
           value={data.name1}
           setData={setData}
@@ -307,6 +323,7 @@ const RegistrationForm = () => {
         <Input
           type="text"
           name="phoneNumber1"
+          className="input__reg"
           placeholder="Referee Phone number 1*"
           value={data.phoneNumber1}
           setData={setData}
@@ -317,6 +334,7 @@ const RegistrationForm = () => {
         <Input
           type="text"
           name="relationship1"
+          className="input__reg"
           placeholder="Relationship*"
           value={data.relationship1}
           setData={setData}
@@ -328,6 +346,7 @@ const RegistrationForm = () => {
         <Input
           type="text"
           name="name2"
+          className="input__reg"
           placeholder="Referee Name 2*"
           value={data.name2}
           setData={setData}
@@ -336,6 +355,7 @@ const RegistrationForm = () => {
         <Input
           type="text"
           name="phoneNumber2"
+          className="input__reg"
           placeholder="Referee Phone number 2*"
           value={data.phoneNumber2}
           setData={setData}
@@ -346,6 +366,7 @@ const RegistrationForm = () => {
         <Input
           type="text"
           name="relationship2"
+          className="input__reg"
           placeholder="Relationship*"
           value={data.relationship2}
           setData={setData}
