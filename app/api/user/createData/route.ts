@@ -2,7 +2,7 @@ import connectToDatabase from "../../../../lib/mongodb";
 import { NextRequest, NextResponse } from "next/server";
 import { userModel as User } from "../../../../lib/models/userModel";
 import { createUserData } from "../../../../lib/controllers/userControllers";
-import { formatFormatData } from "@/scripts";
+import { formatFormData } from "@/scripts";
 
 export async function POST(req: NextRequest) {
   //get user from header, add user to existing body and call controller
@@ -23,10 +23,22 @@ export async function POST(req: NextRequest) {
 
       const formData = await req.formData();
 
-      const body = formatFormatData(formData, user);
+      const body = formatFormData(formData, user);
 
       if (!body) {
         throw new Error("unable to format form");
+      }
+
+      if (body.gender === "Gender") {
+        throw new Error("Please select a gender");
+      }
+
+      if (body.otherInfo.maritalStatus === "Marital Status") {
+        throw new Error("Please select a marital status");
+      }
+
+      if (body.progInfo === "Choose Programme") {
+        throw new Error("Please select a programme choice");
       }
 
       // return NextResponse.json({ status: body }, { status: 201 });

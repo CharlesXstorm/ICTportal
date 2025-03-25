@@ -2,16 +2,16 @@
 
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { registerData } from "@/data";
+import { programs, registerData } from "@/data";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
-import Select from "./ui/Select";
 import Photo from "./ui/Photo";
 import Date from "./ui/Date";
 import { upload_img } from "@/scripts";
 import { useStore } from "@/store";
 import axios from "axios";
 import Loading from "./ui/Loading";
+import Dropdown from "./ui/Dropdown";
 
 const RegistrationForm = () => {
   const [data, setData] = useState<{ [key: string]: any }>({ ...registerData });
@@ -68,7 +68,6 @@ const RegistrationForm = () => {
 
   useEffect(() => {
     if (userData) {
-      console.log("userData", userData);
       //setData with userData
       Object.keys(userData).forEach((el) => {
         if (el != "user" && el != "__v" && el != "_id") {
@@ -87,7 +86,8 @@ const RegistrationForm = () => {
         }
       });
     } else {
-      console.log("no user data", userData);
+      return;
+      // console.log("no user data", userData);
     }
   }, [userData]);
 
@@ -147,11 +147,14 @@ const RegistrationForm = () => {
           autoComplete="additional-name"
           disabled={disabled}
         />
-        <Select
-          className="w-[50%]"
+        <Dropdown
+          id="gender"
           name="gender"
-          options={["Male", "Female"]}
           setData={setData}
+          data={data.gender}
+          options={["Gender", "Male", "Female"]}
+          disabled={disabled}
+          searchable={false}
         />
       </div>
 
@@ -163,6 +166,7 @@ const RegistrationForm = () => {
           value={data.dateOfBirth}
           setData={setData}
           autoComplete="bday"
+          disabled={disabled}
         />
         <Input
           type="text"
@@ -244,46 +248,27 @@ const RegistrationForm = () => {
       />
 
       <div className="signup__form__item">
-        <Select
-          className="w-[50%]"
+        <Dropdown
+          id="maritalStatus"
           name="maritalStatus"
-          options={["Single", "Married"]}
           setData={setData}
+          data={data.maritalStatus}
+          options={["Marital Status", "Single", "Married"]}
+          disabled={disabled}
+          searchable={false}
         />
       </div>
 
       <p className="signup__form__title">PROGRAM INFORMATION</p>
       <div className="signup__form__item">
-        <Input
-          type="text"
-          name="choice"
-          className="input__reg"
-          placeholder="Choice of program*"
-          value={data.choice}
+        <Dropdown
+          id="progInfo"
+          name="progInfo"
           setData={setData}
+          data={data.progInfo}
+          options={programs}
           disabled={disabled}
-        />
-      </div>
-
-      <p className="signup__form__title">DURATION OF PROGRAM</p>
-      <div className="signup__form__group">
-        <Input
-          type="text"
-          name="startDate"
-          className="input__reg"
-          placeholder="Date of commencement*"
-          value={data.startDate}
-          setData={setData}
-          disabled={disabled}
-        />
-        <Input
-          type="text"
-          name="endDate"
-          className="input__reg"
-          placeholder="Expected date of graduation*"
-          value={data.endDate}
-          setData={setData}
-          disabled={disabled}
+          searchable={true}
         />
       </div>
 
@@ -291,25 +276,16 @@ const RegistrationForm = () => {
       <div className="signup__form__group">
         <Input
           type="text"
-          name="background1"
+          name="qualification"
           className="input__reg"
-          placeholder="Background 1*"
-          value={data.background1}
-          setData={setData}
-          disabled={disabled}
-        />
-        <Input
-          type="text"
-          name="background2"
-          className="input__reg"
-          placeholder="Background 2*"
-          value={data.background2}
+          placeholder="Highest Qualification*"
+          value={data.qualification}
           setData={setData}
           disabled={disabled}
         />
       </div>
 
-      <p className="signup__form__title">TWO REFEREES</p>
+      <p className="signup__form__title">REFEREES</p>
       <div className="signup__form__group">
         <Input
           type="text"
@@ -382,10 +358,7 @@ const RegistrationForm = () => {
         this Center as it concerns this training program.
       </p>
 
-      <Button
-        onClick={submitHandler}
-        disabled={disabled}
-      >
+      <Button onClick={submitHandler} disabled={disabled}>
         {btnSubmit && (
           <Loading
             height="h-full"

@@ -49,7 +49,9 @@ const Input: React.FC<inputProps> = ({
       <input
         ref={inputRef}
         id={id}
-        className={className}
+        className={[`${className}`, `${disabled ? "text-zinc-500" : ""}`]
+          .filter(Boolean)
+          .join(" ")}
         type={type}
         name={name}
         value={value}
