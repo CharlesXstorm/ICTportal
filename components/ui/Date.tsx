@@ -8,6 +8,7 @@ interface inputProps {
   name?: string;
   value?: string;
   placeholder: string;
+  disabled: boolean;
   setData?: React.Dispatch<React.SetStateAction<{ [key: string]: any }>>;
   autoComplete?: React.HTMLInputAutoCompleteAttribute;
 }
@@ -18,6 +19,7 @@ const Date: React.FC<inputProps> = ({
   name,
   value,
   placeholder,
+  disabled,
   setData,
   autoComplete,
 }) => {
@@ -26,7 +28,7 @@ const Date: React.FC<inputProps> = ({
 
   const clickHandler = () => {
     if (inputRef.current) {
-      // console.log("inRef is ready", inputRef)
+      // inputRef.current.focus();
       inputRef.current.showPicker();
     }
   };
@@ -40,17 +42,30 @@ const Date: React.FC<inputProps> = ({
     }
   };
 
-  useEffect(()=>{
-    if(value){
+  useEffect(() => {
+    if (value) {
       setDataValue(value);
     }
-  },[value])
+  }, [value]);
 
   return (
     <div className="date">
-      <button onClick={clickHandler} type="button" className="date__button">
+      <button
+        onClick={clickHandler}
+        type="button"
+        disabled={disabled}
+        className={[
+          "date__button",
+          `${dataValue === "Date of Birth" ? "text-zinc-500" : ""}`,
+          `${disabled ? "text-zinc-500" : ""}`,
+        ]
+          .filter(Boolean)
+          .join(" ")}
+      >
         {dataValue}
-        <span className="self-right w-[1.2em]"><img src="/svg/down-arrow-black.svg" alt="arrown_down" /></span>
+        <span className="self-right w-[1.2em]">
+          <img src="/svg/down-arrow-black.svg" alt="arrown_down" />
+        </span>
       </button>
       <input
         ref={inputRef}

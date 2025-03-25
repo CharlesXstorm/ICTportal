@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import { programs, registerData } from "@/data";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
-import Select from "./ui/Select";
 import Photo from "./ui/Photo";
 import Date from "./ui/Date";
 import { upload_img } from "@/scripts";
@@ -87,7 +86,8 @@ const RegistrationForm = () => {
         }
       });
     } else {
-      console.log("no user data", userData);
+      null
+      // console.log("no user data", userData);
     }
   }, [userData]);
 
@@ -166,6 +166,7 @@ const RegistrationForm = () => {
           value={data.dateOfBirth}
           setData={setData}
           autoComplete="bday"
+          disabled={disabled}
         />
         <Input
           type="text"

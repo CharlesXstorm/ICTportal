@@ -48,7 +48,7 @@ body {
 }
 
 .date{
-@apply relative text-sm flex flex-col justify-center w-[50%] lg:w-full rounded-[6px] bg-zinc-100;
+@apply relative text-sm flex flex-col justify-center w-[50%] lg:w-full rounded-[6px] bg-zinc-100 border-[1px];
 }
 
 .date__button{
