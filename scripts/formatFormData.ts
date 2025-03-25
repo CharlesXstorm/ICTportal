@@ -1,4 +1,4 @@
-export const formatFormatData = (
+export const formatFormData = (
   formData: FormData,
   user: { [key: string]: any }
 ) => {
@@ -21,17 +21,9 @@ export const formatFormatData = (
       resAddress: formData.get("resAddress"),
       maritalStatus: formData.get("maritalStatus"),
     },
-    progInfo: { choice: formData.get("choice") },
+    progInfo: formData.get("progInfo"),
 
-    progDruration: {
-      startDate: formData.get("startDate"),
-      endDate: formData.get("endDate"),
-    },
-
-    eduBackground: {
-      background1: formData.get("background1"),
-      background2: formData.get("background2"),
-    },
+    qualification: formData.get("qualification"),
 
     referees: {
       name1: formData.get("name1"),

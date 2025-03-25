@@ -2,7 +2,7 @@ import connectToDatabase from "../../../../lib/mongodb";
 import { NextRequest, NextResponse } from "next/server";
 import { userModel as User } from "../../../../lib/models/userModel";
 import { createUserData } from "../../../../lib/controllers/userControllers";
-import { formatFormatData } from "@/scripts";
+import { formatFormData } from "@/scripts";
 
 export async function POST(req: NextRequest) {
   //get user from header, add user to existing body and call controller
@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
 
       const formData = await req.formData();
 
-      const body = formatFormatData(formData, user);
+      const body = formatFormData(formData, user);
 
       if (!body) {
         throw new Error("unable to format form");

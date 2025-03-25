@@ -256,32 +256,10 @@ const RegistrationForm = () => {
       <div className="signup__form__item">
         <Input
           type="text"
-          name="choice"
+          name="progInfo"
           className="input__reg"
           placeholder="Choice of program*"
-          value={data.choice}
-          setData={setData}
-          disabled={disabled}
-        />
-      </div>
-
-      <p className="signup__form__title">DURATION OF PROGRAM</p>
-      <div className="signup__form__group">
-        <Input
-          type="text"
-          name="startDate"
-          className="input__reg"
-          placeholder="Date of commencement*"
-          value={data.startDate}
-          setData={setData}
-          disabled={disabled}
-        />
-        <Input
-          type="text"
-          name="endDate"
-          className="input__reg"
-          placeholder="Expected date of graduation*"
-          value={data.endDate}
+          value={data.progInfo}
           setData={setData}
           disabled={disabled}
         />
@@ -291,25 +269,16 @@ const RegistrationForm = () => {
       <div className="signup__form__group">
         <Input
           type="text"
-          name="background1"
+          name="qualification"
           className="input__reg"
-          placeholder="Background 1*"
-          value={data.background1}
-          setData={setData}
-          disabled={disabled}
-        />
-        <Input
-          type="text"
-          name="background2"
-          className="input__reg"
-          placeholder="Background 2*"
-          value={data.background2}
+          placeholder="Highest Qualification*"
+          value={data.qualification}
           setData={setData}
           disabled={disabled}
         />
       </div>
 
-      <p className="signup__form__title">TWO REFEREES</p>
+      <p className="signup__form__title">REFEREES</p>
       <div className="signup__form__group">
         <Input
           type="text"

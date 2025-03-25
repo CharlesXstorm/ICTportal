@@ -99,42 +99,17 @@ const dataSchema = new mongoose.Schema({
   },
 
   progInfo: {
-    choice: {
-      type: String,
-      trim: true,
-      required: [true, "A user must have a program choice"],
-      lowercase: true,
-    },
+    type: String,
+    trim: true,
+    required: [true, "A user must have a program choice"],
+    lowercase: true,
   },
 
-  progDruration: {
-    startDate: {
-      type: String,
-      trim: true,
-      required: [true, "A user must have a start date"],
-      lowercase: true,
-    },
-    endDate: {
-      type: String,
-      trim: true,
-      required: [true, "A user must have an end date"],
-      lowercase: true,
-    },
-  },
-
-  eduBackground: {
-    background1: {
-      type: String,
-      trim: true,
-      required: [true, "A user must have a first edu background"],
-      lowercase: true,
-    },
-    background2: {
-      type: String,
-      trim: true,
-      required: [true, "A user must have a second edu background"],
-      lowercase: true,
-    },
+  qualification: {
+    type: String,
+    trim: true,
+    required: [true, "A user must have a qualification"],
+    lowercase: true,
   },
 
   referees: {
