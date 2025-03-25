@@ -86,7 +86,7 @@ const Dropdown: React.FC<dropdownProps> = ({
     });
   };
 
-  let filteredOptions =
+  const filteredOptions =
     search.length === 0
       ? [...options]
       : options.filter((item) =>

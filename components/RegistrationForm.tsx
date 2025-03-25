@@ -86,7 +86,7 @@ const RegistrationForm = () => {
         }
       });
     } else {
-      null
+      return;
       // console.log("no user data", userData);
     }
   }, [userData]);
@@ -152,7 +152,7 @@ const RegistrationForm = () => {
           name="gender"
           setData={setData}
           data={data.gender}
-          options={["Gender","Male", "Female"]}
+          options={["Gender", "Male", "Female"]}
           disabled={disabled}
           searchable={false}
         />
@@ -248,12 +248,12 @@ const RegistrationForm = () => {
       />
 
       <div className="signup__form__item">
-      <Dropdown
+        <Dropdown
           id="maritalStatus"
           name="maritalStatus"
           setData={setData}
           data={data.maritalStatus}
-          options={["Marital Status","Single", "Married"]}
+          options={["Marital Status", "Single", "Married"]}
           disabled={disabled}
           searchable={false}
         />
