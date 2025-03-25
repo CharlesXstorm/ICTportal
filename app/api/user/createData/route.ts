@@ -29,6 +29,18 @@ export async function POST(req: NextRequest) {
         throw new Error("unable to format form");
       }
 
+      if (body.gender === "Gender") {
+        throw new Error("Please select a gender");
+      }
+
+      if (body.otherInfo.maritalStatus === "Marital Status") {
+        throw new Error("Please select a marital status");
+      }
+
+      if (body.progInfo === "Choose Programme") {
+        throw new Error("Please select a programme choice");
+      }
+
       // return NextResponse.json({ status: body }, { status: 201 });
       const createDataRes = await createUserData(req, body);
       return createDataRes;

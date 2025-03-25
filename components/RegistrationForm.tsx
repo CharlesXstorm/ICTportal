@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { registerData } from "@/data";
+import { programs, registerData } from "@/data";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
 import Select from "./ui/Select";
@@ -12,6 +12,7 @@ import { upload_img } from "@/scripts";
 import { useStore } from "@/store";
 import axios from "axios";
 import Loading from "./ui/Loading";
+import Dropdown from "./ui/Dropdown";
 
 const RegistrationForm = () => {
   const [data, setData] = useState<{ [key: string]: any }>({ ...registerData });
@@ -68,7 +69,6 @@ const RegistrationForm = () => {
 
   useEffect(() => {
     if (userData) {
-      console.log("userData", userData);
       //setData with userData
       Object.keys(userData).forEach((el) => {
         if (el != "user" && el != "__v" && el != "_id") {
@@ -147,11 +147,14 @@ const RegistrationForm = () => {
           autoComplete="additional-name"
           disabled={disabled}
         />
-        <Select
-          className="w-[50%]"
+        <Dropdown
+          id="gender"
           name="gender"
-          options={["Male", "Female"]}
           setData={setData}
+          data={data.gender}
+          options={["Gender","Male", "Female"]}
+          disabled={disabled}
+          searchable={false}
         />
       </div>
 
@@ -244,24 +247,27 @@ const RegistrationForm = () => {
       />
 
       <div className="signup__form__item">
-        <Select
-          className="w-[50%]"
+      <Dropdown
+          id="maritalStatus"
           name="maritalStatus"
-          options={["Single", "Married"]}
           setData={setData}
+          data={data.maritalStatus}
+          options={["Marital Status","Single", "Married"]}
+          disabled={disabled}
+          searchable={false}
         />
       </div>
 
       <p className="signup__form__title">PROGRAM INFORMATION</p>
       <div className="signup__form__item">
-        <Input
-          type="text"
+        <Dropdown
+          id="progInfo"
           name="progInfo"
-          className="input__reg"
-          placeholder="Choice of program*"
-          value={data.progInfo}
           setData={setData}
+          data={data.progInfo}
+          options={programs}
           disabled={disabled}
+          searchable={true}
         />
       </div>
 
@@ -351,10 +357,7 @@ const RegistrationForm = () => {
         this Center as it concerns this training program.
       </p>
 
-      <Button
-        onClick={submitHandler}
-        disabled={disabled}
-      >
+      <Button onClick={submitHandler} disabled={disabled}>
         {btnSubmit && (
           <Loading
             height="h-full"
