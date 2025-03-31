@@ -48,7 +48,7 @@ body {
 }
 
 .date{
-@apply relative text-sm flex flex-col justify-center w-[50%] lg:w-full rounded-[6px] bg-zinc-100 border-[1px];
+@apply relative text-sm flex flex-col py-1 justify-center w-[50%] lg:w-full rounded-[6px] bg-zinc-100 border-[1px];
 }
 
 .date__button{
@@ -65,6 +65,10 @@ body {
 
 .dropdown__info{
   @apply flex-col absolute z-[3] top-[110%] h-[10em] w-full border-[2px] bg-white rounded-[4px];
+}
+
+.dropdown__search{
+  @apply border rounded-[4px] p-1 w-full
 }
 
 .header {
