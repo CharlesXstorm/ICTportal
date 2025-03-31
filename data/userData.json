@@ -17,11 +17,9 @@
       "resAddress": "address, lagos",
       "maritalStatus": "married"
     },
-    "progInfo": { "choice": "programming" },
+    "progInfo": "programming",
 
-    "progDruration": { "startDate": "4/oct/25", "endDate": "2/dec/25" },
-
-    "eduBackground": { "background1": "bosol", "background2": "lutron" },
+    "qualification": "B.eng",
 
     "referees": {
       "name1": "ref",

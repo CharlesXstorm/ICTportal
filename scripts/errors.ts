@@ -68,21 +68,12 @@ export const handleFormErrors = (err: string | string[]) => {
     case err.includes("maritalStatus"):
       error.maritalStatus = "Please select a marital status";
       return error.maritalStatus;
-    case err.includes("choice"):
-      error.choice = "Please select a choice";
-      return error.choice;
-    case err.includes("startDate"):
-      error.startDate = "Please select a start date";
-      return error.startDate;
-    case err.includes("endDate"):
-      error.endDate = "Please select an end date";
-      return error.endDate;
-    case err.includes("background1"):
-      error.background1 = "Please enter your first educational background";
-      return error.background1;
-    case err.includes("background2"):
-      error.background2 = "Please enter your second educational background";
-      return error.background2;
+    case err.includes("progInfo"):
+      error.progInfo = "Please select a programme choice";
+      return error.progInfo;
+    case err.includes("qualification"):
+      error.qualification = "Please enter your highest qualification";
+      return error.qualification;
     case err.includes("name1"):
       error.name1 = "Please enter your first referee's name";
       return error.name1;

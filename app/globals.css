@@ -48,11 +48,27 @@ body {
 }
 
 .date{
-@apply relative flex flex-col justify-center w-[50%] lg:w-full rounded-[6px] bg-zinc-100;
+@apply relative text-sm flex flex-col py-1 justify-center w-[50%] lg:w-full rounded-[6px] bg-zinc-100 border-[1px];
 }
 
 .date__button{
  @apply flex px-[8px] w-full items-center justify-between
+}
+
+.dropdown{
+  @apply relative text-sm w-full;
+}
+
+.dropdown__button{
+@apply  w-full flex justify-between items-center rounded-[4px] p-1 bg-white
+}
+
+.dropdown__info{
+  @apply flex-col absolute z-[3] top-[110%] h-[10em] w-full border-[2px] bg-white rounded-[4px];
+}
+
+.dropdown__search{
+  @apply border rounded-[4px] p-1 w-full
 }
 
 .header {

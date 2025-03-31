@@ -42,7 +42,8 @@ const Header: React.FC<headerProps> = ({
       setUserInfo(response.data.data);
       // console.log("userInfo response", response.data.data);
     } catch (err: any) {
-      console.log("error", err.message);
+      return err.message;
+      // console.log(err.message);
     }
   };
 
@@ -67,7 +68,7 @@ const Header: React.FC<headerProps> = ({
       // setUserData({ ...registerData });
       // setUserData(null);
       // setDisabled(false);
-      console.log("error", err.message);
+      return err.message;
     }
   };
 
