@@ -162,7 +162,7 @@ const Dropdown: React.FC<dropdownProps> = ({
                 }
               }}
               placeholder="Search"
-              className="border border-orange-400 rounded-[4px] p-1 w-full "
+              className="dropdown__search"
             />}
           </div>
           <div className="flex flex-col w-full flex-grow overflow-auto p-1">
