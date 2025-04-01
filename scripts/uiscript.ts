@@ -1,6 +1,6 @@
-const getEl = () => {
-  const fileInput = document.querySelector("#uploadfile") as HTMLInputElement;
-  const box = document.querySelector("#uploadbox") as HTMLElement;
+const getEl = (inputId: string, boxId: string) => {
+  const fileInput = document.querySelector(`#${inputId}`) as HTMLInputElement;
+  const box = document.querySelector(`#${boxId}`) as HTMLElement;
   return { fileInput, box };
 };
 
@@ -9,28 +9,38 @@ const processFile = async (
   maxFile: number,
   maxSize: number,
   maxWidth: number,
-  maxHeight: number
+  maxHeight: number,
+  inputId: string,
+  boxId: string
 ) => {
   try {
-    const res = await filePromise(files, maxFile, maxSize, maxWidth, maxHeight);
+    const res = await filePromise(
+      files,
+      maxFile,
+      maxSize,
+      maxWidth,
+      maxHeight,
+      inputId,
+      boxId
+    );
     return res;
   } catch (err) {
     return err;
   }
 };
 
-const clickHandler = () => {
-  const { fileInput } = getEl();
+const clickHandler = (inputId: string, boxId: string) => {
+  const { fileInput } = getEl(inputId, boxId);
   fileInput?.click();
 };
 
-const dragoverHandler = () => {
-  const { box } = getEl();
+const dragoverHandler = (inputId: string, boxId: string) => {
+  const { box } = getEl(inputId, boxId);
   box.style.borderColor = "chartreuse";
 };
 
-const dragleaveHandler = () => {
-  const { box } = getEl();
+const dragleaveHandler = (inputId: string, boxId: string) => {
+  const { box } = getEl(inputId, boxId);
   box.style.borderColor = "#ccc";
 };
 
@@ -39,10 +49,12 @@ const filePromise = (
   maxFile: number,
   maxSize: number,
   maxWidth: number,
-  maxHeight: number
+  maxHeight: number,
+  inputId: string,
+  boxId: string
 ) => {
   return new Promise((resolve, reject) => {
-    const { fileInput, box } = getEl();
+    const { fileInput, box } = getEl(inputId, boxId);
     box.style.borderColor = "#ccc";
     maxSize = maxSize * 1024;
 
@@ -74,8 +86,9 @@ const filePromise = (
 };
 
 export const uiscript = {
-  click: clickHandler,
-  dragover: dragoverHandler,
-  dragleave: dragleaveHandler,
+  click: (inputId: string, boxId: string) => clickHandler(inputId, boxId),
+  dragover: (inputId: string, boxId: string) => dragoverHandler(inputId, boxId),
+  dragleave: (inputId: string, boxId: string) =>
+    dragleaveHandler(inputId, boxId),
   drop: processFile,
 };

@@ -18,6 +18,9 @@ const RegistrationForm = () => {
   const [btnSubmit, setBtnSubmit] = useState(false);
   const { userInfo, userData, disabled, setDisabled } = useStore();
 
+  // console.log("payPhoto", data.payPhoto)
+  // console.log("Photo", data.photo)
+
   const submitHandler = async () => {
     setBtnSubmit(true);
     const publicID = `${userInfo?._id.slice(0, 5)}_${
@@ -105,6 +108,9 @@ const RegistrationForm = () => {
           <Photo
             type="file"
             name="photo"
+            inputId="uploadFile1"
+            boxId="uploadBox1"
+            className="w-[120px] h-[120px]"
             accept="image/png, image/jpg, image/jpeg"
             maxSize={200}
             photoUrl={data.photo}
@@ -347,6 +353,84 @@ const RegistrationForm = () => {
           value={data.relationship2}
           setData={setData}
           disabled={disabled}
+        />
+      </div>
+
+      <p className="signup__form__title">DECLARATION OF PAYMENT</p>
+      <div className="signup__form__group">
+        <Date
+          id="payDate"
+          type="date"
+          name="dateOfPay"
+          placeholder="Date of Payment*"
+          value={data.dateOfPay}
+          setData={setData}
+          disabled={disabled}
+        />
+        <Input
+          type="text"
+          name="amount"
+          className="input__reg"
+          placeholder="Amount*"
+          value={data.amount}
+          setData={setData}
+          disabled={disabled}
+        />
+      </div>
+
+      <div className="signup__form__group">
+        <Dropdown
+          id="payMethod"
+          name="payMethod"
+          setData={setData}
+          data={data.payMethod}
+          options={["Payment Method", "Bank Tranfer", "Bank Deposit"]}
+          disabled={disabled}
+          searchable={false}
+        />
+        <Input
+          type="text"
+          name="payName"
+          className="input__reg"
+          placeholder="Name of Payer*"
+          value={data.payName}
+          setData={setData}
+          disabled={disabled}
+        />
+      </div>
+
+      <div className="signup__form__group">
+        <Input
+          type="text"
+          name="payId"
+          className="input__reg"
+          placeholder="Transaction ID*"
+          value={data.payId}
+          setData={setData}
+          disabled={disabled}
+        />
+        <Input
+          type="text"
+          name="bank"
+          className="input__reg"
+          placeholder="Bank, City*"
+          value={data.bank}
+          setData={setData}
+          disabled={disabled}
+        />
+      </div>
+
+      <div className="signup__form__group">
+        <Photo
+          type="file"
+          name="payPhoto"
+          inputId="uploadFile2"
+          boxId="uploadBox2"
+          className="w-full h-[200px]"
+          accept="image/png, image/jpg, image/jpeg"
+          maxSize={200}
+          photoUrl={data.payPhoto}
+          setData={setData}
         />
       </div>
 

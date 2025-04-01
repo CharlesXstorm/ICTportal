@@ -2,15 +2,17 @@
 
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { inputProps } from "@/types";
+import { inputPhotoProps } from "@/types";
 import { image, Svg } from "../svgs";
 import { uiscript } from "@/scripts";
 import { useStore } from "@/store";
 
-const Photo: React.FC<inputProps> = ({
+const Photo: React.FC<inputPhotoProps> = ({
   className,
   type,
   name,
+  inputId,
+  boxId,
   photoUrl,
   setData,
   accept,
@@ -30,7 +32,9 @@ const Photo: React.FC<inputProps> = ({
       maxFile,
       maxSize,
       maxWidth,
-      maxHeight
+      maxHeight,
+      inputId,
+      boxId
     )) as any;
     if (res) {
       if (typeof res === "string") {
@@ -44,7 +48,6 @@ const Photo: React.FC<inputProps> = ({
 
   useEffect(() => {
     if (userData) {
-      
       setBgImage(`url(${photoUrl})`);
     } else {
       if (info) {
@@ -70,7 +73,7 @@ const Photo: React.FC<inputProps> = ({
         }
       }
     }
-  }, [info,userData,photoUrl]);
+  }, [info, userData, photoUrl]);
 
   return (
     <div
@@ -83,29 +86,44 @@ const Photo: React.FC<inputProps> = ({
         .join(" ")}
     >
       <div
-        onClick={uiscript.click}
+        onClick={() => uiscript.click(inputId, boxId)}
         onDragOver={(e) => {
           e.preventDefault();
-          uiscript.dragover();
+          uiscript.dragover(inputId, boxId);
         }}
-        onDragLeave={uiscript.dragleave}
+        onDragLeave={() => uiscript.dragleave(inputId, boxId)}
         onDrop={async (e) => {
           e.preventDefault();
           const files = e.dataTransfer.files;
           processFile(files);
         }}
-        id="uploadbox"
+        // id="uploadbox"
+        id={boxId}
         className="uploadbox relative"
       >
         <div className="w-full flex justify-center pt-4">
           <Svg svg={image} width="3em" color="#666" />
         </div>
         <div className="flex flex-col justify-center text-[12px]">
-          <span className="text-center ">Drag & drop image(s) here or </span>
-          <span className="text-center text-blue-600">browse images</span>
+          {name === "photo" && (
+            <>
+              <span className="text-center ">
+                Drag & drop image here or{" "}
+              </span>
+              <span className="text-center text-blue-600">browse image</span>
+            </>
+          )}
+          {name === "payPhoto" && (
+            <>
+              <span className="text-center ">
+                Drag & drop payment receipt image here or{" "}
+              </span>
+              <span className="text-center text-blue-600">browse payment receipt image</span>
+            </>
+          )}
         </div>
         <input
-          id="uploadfile"
+          id={inputId}
           onChange={async (e: React.ChangeEvent<HTMLInputElement>) => {
             const files = e.target.files;
             if (files) {

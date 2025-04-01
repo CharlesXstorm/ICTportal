@@ -33,6 +33,13 @@ export const registerData = {
   name2: "",
   phoneNumber2: "",
   relationship2: "",
+  dateOfPay: "",
+  amount: "",
+  payMethod: "",
+  payName: "",
+  payId: "",
+  bank: "",
+  payPhoto: "",
 };
 
 export const tableHead = [

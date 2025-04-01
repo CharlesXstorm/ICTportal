@@ -18,8 +18,21 @@ export interface inputProps {
   cols?: number;
   name?: string;
   value?: string;
-  accept?: string;
   placeholder?: string;
+  disabled?: boolean;
+  setData?: React.Dispatch<React.SetStateAction<{ [key: string]: any }>>;
+  onChange?: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+}
+
+export interface inputPhotoProps {
+  className?: string;
+  type: string;
+  name?: string;
+  inputId: string;
+  boxId: string;
+  accept?: string;
   disabled?: boolean;
   maxFile?: number;
   maxSize?: number;
@@ -27,9 +40,7 @@ export interface inputProps {
   maxHeight?: number;
   photoUrl?: string;
   setData?: React.Dispatch<React.SetStateAction<{ [key: string]: any }>>;
-  onChange?: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
+
 }
 
 export interface svgProps {

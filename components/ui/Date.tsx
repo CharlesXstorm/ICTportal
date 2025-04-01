@@ -23,7 +23,7 @@ const Date: React.FC<inputProps> = ({
   setData,
   autoComplete,
 }) => {
-  const [dataValue, setDataValue] = useState(value || "Date of Birth");
+  const [dataValue, setDataValue] = useState(value || `${placeholder}`);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const clickHandler = () => {
@@ -56,7 +56,7 @@ const Date: React.FC<inputProps> = ({
         disabled={disabled}
         className={[
           "date__button",
-          `${dataValue === "Date of Birth" ? "text-zinc-500" : ""}`,
+          `${dataValue === `${placeholder}` ? "text-zinc-500" : ""}`,
           `${disabled ? "text-zinc-500" : ""}`,
         ]
           .filter(Boolean)
